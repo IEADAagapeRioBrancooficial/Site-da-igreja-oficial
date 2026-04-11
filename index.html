@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Assembleia de Deus – IEADA</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header id="header">
+    <div class="header-inner">
+      <div class="logo-area">
+        <img src="logo.png" alt="Logo IEADA" class="logo-img" id="logoImg" />
+        <div class="logo-text">
+          <span class="logo-title">Assembleia de Deus</span>
+          <span class="logo-sub">IEAD_Ágape – Rio Branco-ac</span>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="#cultos">Cultos</a>
+        <a href="#palavra">Palavra</a>
+        <a href="#igrejas">Igrejas</a>
+        <a href="#pastores">Pastores</a>
+      </nav>
+      <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+    </div>
+    <nav class="mobile-nav" id="mobileNav">
+      <a href="#cultos">Cultos</a>
+      <a href="#palavra">Palavra</a>
+      <a href="#igrejas">Igrejas</a>
+      <a href="#pastores">Pastores</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-particles" id="particles"></div>
+    <div class="hero-content">
+      <div class="hero-cross">✝</div>
+      <h1 class="hero-title">Assembleia de Deus</h1>
+      <p class="hero-verse" id="heroVerse">Carregando versículo…</p>
+      <a href="#cultos" class="btn-hero">Ver Próximos Cultos</a>
+    </div>
+    <div class="hero-scroll">▼</div>
+  </section>
+
+  <!-- PALAVRA DO DIA -->
+  <section class="palavra-section" id="palavra">
+    <div class="section-label">✦ Palavra do Dia ✦</div>
+    <div class="palavra-card" id="palavraCard">
+      <div class="palavra-loading"><i class="fas fa-cross fa-spin"></i></div>
+    </div>
+  </section>
+
+  <!-- CULTOS / AVISOS -->
+  <section class="cultos-section" id="cultos">
+    <div class="container">
+      <h2 class="section-title">Programação de Cultos</h2>
+      <p class="section-desc">Venha adorar ao Senhor. Todos são bem-vindos!</p>
+      <div class="cultos-grid" id="cultosGrid"></div>
+      <div class="avisos-box" id="avisosBox">
+        <h3><i class="fas fa-bullhorn"></i> Avisos Importantes</h3>
+        <ul id="avisosList"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- IGREJAS / INSTAGRAM -->
+  <section class="igrejas-section" id="igrejas">
+    <div class="container">
+      <h2 class="section-title">Nossas Igrejas</h2>
+      <p class="section-desc">Conheça cada congregação e acompanhe nossas redes sociais</p>
+      <div class="igrejas-grid" id="igrejasGrid"></div>
+    </div>
+  </section>
+
+  <!-- PASTORES -->
+  <section class="pastores-section" id="pastores">
+    <div class="container">
+      <h2 class="section-title">Nossos Pastores</h2>
+      <p class="section-desc">Líderes ungidos a serviço do Reino de Deus</p>
+      <div class="pastores-grid" id="pastoresGrid"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <span class="footer-cross">✝</span>
+        <span>Assembleia de Deus – ÁGAPE</span>
+      </div>
+      <p class="footer-verse">"Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito." – João 3:16</p>
+      <p class="footer-copy">© 2026 IEADA. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
