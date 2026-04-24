@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ÁGAPE Bible Game – Quiz Bíblico</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --red:      #b71c1c;
+      --red-dark: #7f0000;
+      --red-mid:  #c62828;
+      --gold:     #c9a84c;
+      --gold-lt:  #f0c040;
+      --yellow:   #ffd600;
+      --dark:     #0f0800;
+      --dark2:    #1a1000;
+      --cream:    #fdf8ee;
+      --green:    #1d9e75;
+      --danger:   #e24b4a;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: radial-gradient(ellipse at 60% 30%, #4a0000 0%, #1a0800 40%, #0f0800 100%);
+      min-height: 100vh;
+      font-family: 'Lato', sans-serif;
+      color: var(--cream);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 16px 40px;
+    }
+
+    /* ── HEADER ── */
+    .game-header {
+      width: 100%;
+      max-width: 680px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      margin-bottom: 24px;
+      border-bottom: 1px solid rgba(201,168,76,0.25);
+    }
+    .game-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .game-logo .cross { font-size: 22px; color: var(--gold); }
+    .game-logo .brand { font-family: 'Cinzel', serif; font-size: 13px; color: var(--gold-lt); }
+    .game-logo .sub   { font-size: 10px; color: rgba(201,168,76,0.6); letter-spacing: .1em; display: block; }
+    .back-btn {
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      color: var(--gold);
+      text-decoration: none;
+      border: 1px solid rgba(201,168,76,0.35);
+      padding: 7px 16px;
+      border-radius: 20px;
+      transition: background .2s;
+    }
+    .back-btn:hover { background: rgba(201,168,76,0.12); }
+
+    /* ── QUIZ CONTAINER ── */
+    #quiz-root {
+      width: 100%;
+      max-width: 680px;
+      background: linear-gradient(160deg, rgba(127,0,0,0.45) 0%, rgba(15,8,0,0.95) 100%);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 16px 60px rgba(183,28,28,0.25);
+    }
+
+    /* ── TELA INICIAL ── */
+    .q-start {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 48px 32px;
+      text-align: center;
+    }
+    .q-start-cross { font-size: 52px; color: var(--gold); margin-bottom: 12px; text-shadow: 0 0 30px rgba(201,168,76,0.4); }
+    .q-start-title { font-family: 'Cinzel', serif; font-size: 24px; color: var(--gold-lt); margin-bottom: 6px; }
+    .q-start-sub   { font-size: 14px; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
+    .q-start-brand { font-size: 11px; color: rgba(201,168,76,0.55); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 36px; }
+    .q-levels {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      width: 100%;
+      margin-bottom: 28px;
+    }
+    .q-level-btn {
+      padding: 18px 8px;
+      border-radius: 10px;
+      border: 1px solid rgba(201,168,76,0.28);
+      background: rgba(255,255,255,0.05);
+      color: var(--cream);
+      cursor: pointer;
+      transition: background .2s, border-color .2s, transform .15s;
+      line-height: 1.5;
+    }
+    .q-level-btn:hover { background: rgba(201,168,76,0.15); border-color: rgba(201,168,76,0.55); transform: translateY(-2px); }
+    .q-level-btn .lv-icon { font-size: 24px; display: block; margin-bottom: 8px; }
+    .q-level-btn .lv-name { font-family: 'Cinzel', serif; font-size: 14px; color: var(--gold-lt); display: block; }
+    .q-level-btn .lv-desc { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 3px; display: block; }
+    .q-start-hint { font-size: 12px; color: rgba(255,255,255,0.28); }
+
+    /* ── QUIZ HEADER ── */
+    .q-header {
+      background: rgba(0,0,0,0.4);
+      border-bottom: 1px solid rgba(201,168,76,0.25);
+      padding: 14px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .q-header-logo { display: flex; align-items: center; gap: 8px; }
+    .q-header-cross { font-size: 18px; color: var(--gold); }
+    .q-header-brand { font-family: 'Cinzel', serif; font-size: 12px; color: var(--gold-lt); }
+    .q-header-brand span { color: rgba(255,255,255,0.4); font-size: 10px; display: block; }
+    .q-score-box {
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.35);
+      border-radius: 20px;
+      padding: 5px 16px;
+      font-size: 13px;
+      color: var(--gold-lt);
+      font-family: 'Cinzel', serif;
+    }
+
+    /* ── QUIZ BODY ── */
+    .q-body { padding: 24px 22px; }
+    .q-progress-bar {
+      background: rgba(255,255,255,0.08);
+      border-radius: 4px;
+      height: 5px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .q-progress-fill {
+      height: 100%;
+      background: linear-gradient(to right, var(--gold), var(--yellow));
+      border-radius: 4px;
+      transition: width .4s ease;
+    }
+    .q-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .q-number { font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: .12em; text-transform: uppercase; }
+    .q-prize {
+      background: rgba(201,168,76,0.15);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 20px;
+      padding: 3px 14px;
+      font-size: 12px;
+      color: var(--gold-lt);
+      font-family: 'Cinzel', serif;
+    }
+    .q-text {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1.55;
+      margin-bottom: 24px;
+      min-height: 56px;
+    }
+
+    /* ── AJUDAS ── */
+    .q-lifelines { display: flex; gap: 10px; margin-bottom: 18px; }
+    .q-ll {
+      flex: 1;
+      padding: 9px 6px;
+      background: rgba(183,28,28,0.28);
+      border: 1px solid rgba(183,28,28,0.45);
+      border-radius: 8px;
+      color: var(--cream);
+      font-size: 12px;
+      cursor: pointer;
+      transition: background .2s, opacity .2s;
+      text-align: center;
+      line-height: 1.4;
+    }
+    .q-ll:hover:not(:disabled) { background: rgba(183,28,28,0.5); }
+    .q-ll:disabled { opacity: 0.3; cursor: default; }
+    .q-ll .ll-icon { font-size: 16px; display: block; margin-bottom: 4px; }
+
+    /* ── OPÇÕES ── */
+    .q-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 18px; }
+    .q-opt {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(201,168,76,0.22);
+      border-radius: 10px;
+      padding: 13px 14px;
+      color: var(--cream);
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: background .2s, border-color .2s, transform .15s;
+      text-align: left;
+      line-height: 1.4;
+      font-family: 'Lato', sans-serif;
+    }
+    .q-opt:hover:not(:disabled) { background: rgba(201,168,76,0.15); border-color: rgba(201,168,76,0.55); transform: translateY(-1px); }
+    .q-opt .opt-letter {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.18);
+      border: 1px solid rgba(201,168,76,0.35);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; color: var(--gold-lt);
+      flex-shrink: 0;
+      font-family: 'Cinzel', serif;
+    }
+    .q-opt.correct { background: rgba(29,158,117,0.28); border-color: var(--green); }
+    .q-opt.correct .opt-letter { background: var(--green); border-color: var(--green); color: #fff; }
+    .q-opt.wrong   { background: rgba(226,75,74,0.22); border-color: var(--danger); }
+    .q-opt.wrong .opt-letter { background: var(--danger); border-color: var(--danger); color: #fff; }
+    .q-opt:disabled { cursor: default; transform: none; }
+
+    /* ── FEEDBACK ── */
+    .q-feedback {
+      display: none;
+      font-size: 13px;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.6;
+      padding: 12px 14px;
+      background: rgba(0,0,0,0.28);
+      border-radius: 8px;
+      border-left: 3px solid rgba(201,168,76,0.4);
+      margin-bottom: 14px;
+    }
+
+    /* ── BOTÃO PRÓXIMA ── */
+    .q-next {
+      width: 100%;
+      padding: 13px;
+      background: linear-gradient(135deg, var(--red-mid), var(--red-dark));
+      border: 1px solid var(--gold);
+      border-radius: 8px;
+      color: var(--gold-lt);
+      font-family: 'Cinzel', serif;
+      font-size: 14px;
+      letter-spacing: .06em;
+      cursor: pointer;
+      display: none;
+      transition: opacity .2s, transform .15s;
+    }
+    .q-next:hover { opacity: .85; transform: translateY(-1px); }
+
+    /* ── TELA FINAL ── */
+    .q-end {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 52px 32px;
+      text-align: center;
+    }
+    .q-end-icon  { font-size: 56px; margin-bottom: 14px; }
+    .q-end-title { font-family: 'Cinzel', serif; font-size: 20px; color: var(--gold-lt); margin-bottom: 10px; }
+    .q-end-score { font-family: 'Cinzel', serif; font-size: 48px; color: var(--yellow); margin-bottom: 4px; }
+    .q-end-sub   { font-size: 14px; color: rgba(255,255,255,0.5); margin-bottom: 8px; }
+    .q-end-prize { font-family: 'Cinzel', serif; font-size: 16px; color: var(--gold); margin-bottom: 16px; }
+    .q-end-verse {
+      font-size: 14px;
+      color: rgba(201,168,76,0.85);
+      font-style: italic;
+      margin: 0 0 28px;
+      line-height: 1.7;
+      padding: 14px 18px;
+      background: rgba(0,0,0,0.25);
+      border-radius: 8px;
+      border-left: 3px solid rgba(201,168,76,0.4);
+      max-width: 440px;
+    }
+    .q-restart {
+      padding: 13px 44px;
+      background: linear-gradient(135deg, var(--red-mid), var(--red-dark));
+      border: 1px solid var(--gold);
+      border-radius: 8px;
+      color: var(--gold-lt);
+      font-family: 'Cinzel', serif;
+      font-size: 14px;
+      letter-spacing: .06em;
+      cursor: pointer;
+      transition: opacity .2s;
+    }
+    .q-restart:hover { opacity: .85; }
+
+    /* ── FOOTER ── */
+    .game-footer {
+      margin-top: 28px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.2);
+      text-align: center;
+      font-family: 'Cinzel', serif;
+      letter-spacing: .06em;
+    }
+
+    /* ── RESPONSIVO ── */
+    @media (max-width: 480px) {
+      .q-options { grid-template-columns: 1fr; }
+      .q-levels  { grid-template-columns: 1fr; }
+      .q-start, .q-end { padding: 36px 20px; }
+      .q-body { padding: 20px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="game-header">
+    <a href="index.html" class="game-logo">
+      <span class="cross">✝</span>
+      <div>
+        <span class="brand">IEADA Bible Game</span>
+        <span class="sub">Assembleia de Deus – Ágape</span>
+      </div>
+    </a>
+    <a href="index.html" class="back-btn">← Voltar ao Site</a>
+  </div>
+
+  <div id="quiz-root"></div>
+
+  <div class="game-footer">✝ IEADA – Assembleia de Deus Ágape © 2026</div>
+
+  <script>
+    const PRIZES = ["PT 1.000","PT 5.000","PT 10.000","PT 50.000","PT 100.000","PT 500.000","PT 1.000.000"];
+
+    const ALL_QUESTIONS = {
+      facil: [
+        { q:"Quem construiu a arca por ordem de Deus?", opts:["Moisés","Noé","Abraão","Salomão"], a:1, exp:"Gênesis 6:14 – Deus ordenou a Noé que construísse a arca para salvar sua família e os animais." },
+        { q:"Quantos dias Deus levou para criar o mundo?", opts:["3 dias","5 dias","6 dias","7 dias"], a:2, exp:"Gênesis 1 – Deus criou tudo em 6 dias e descansou no 7º dia." },
+        { q:"Quem foi engolido por um grande peixe?", opts:["Elias","Jonas","Paulo","Pedro"], a:1, exp:"Jonas 1:17 – Jonas foi engolido por um grande peixe e ficou três dias e três noites dentro dele." },
+        { q:"Qual foi o primeiro homem criado por Deus?", opts:["Abel","Noé","Adão","Abraão"], a:2, exp:"Gênesis 2:7 – Deus formou o homem do pó da terra e o chamou de Adão." },
+        { q:"Qual é o livro mais longo da Bíblia?", opts:["Gênesis","Isaías","Salmos","Jeremias"], a:2, exp:"O livro de Salmos possui 150 capítulos, sendo o mais longo da Bíblia." },
+        { q:"Em que cidade Jesus nasceu?", opts:["Nazaré","Jerusalém","Belém","Jericó"], a:2, exp:"Lucas 2:4-7 – Jesus nasceu em Belém de Judá, como havia sido profetizado." },
+        { q:"Quem negou Jesus três vezes?", opts:["João","Judas","Tiago","Pedro"], a:3, exp:"Mateus 26:75 – Pedro negou conhecer Jesus três vezes antes do galo cantar." },
+        { q:"Qual discípulo traiu Jesus?", opts:["Pedro","Tomé","Judas Iscariotes","Filipe"], a:2, exp:"Mateus 26:14-16 – Judas Iscariotes traiu Jesus por trinta moedas de prata." },
+        { q:"Quantos apóstolos Jesus escolheu?", opts:["7","10","12","14"], a:2, exp:"Lucas 6:13 – Jesus escolheu doze apóstolos para acompanhá-lo em seu ministério." },
+        { q:"Qual é o versículo mais curto da Bíblia?", opts:["Orai!","Jesus chorou.","Louvai ao Senhor.","Amém."], a:1, exp:"João 11:35 – 'Jesus chorou' é considerado o versículo mais curto da Bíblia." },
+      ],
+      medio: [
+        { q:"Quem escreveu a maior parte dos Salmos?", opts:["Salomão","Moisés","Davi","Asafe"], a:2, exp:"A maioria dos 150 Salmos tem Davi como autor, sendo ele o maior salmista da Bíblia." },
+        { q:"Qual era a profissão de Pedro antes de seguir Jesus?", opts:["Carpinteiro","Pescador","Cobrador de impostos","Pastor"], a:1, exp:"Mateus 4:18 – Pedro e seu irmão André eram pescadores no mar da Galileia." },
+        { q:"Quantos livros tem o Novo Testamento?", opts:["22","27","30","39"], a:1, exp:"O Novo Testamento possui 27 livros, desde Mateus até Apocalipse." },
+        { q:"Qual foi a primeira praga enviada ao Egito?", opts:["Gafanhotos","Trevas","Água em sangue","Rãs"], a:2, exp:"Êxodo 7:20 – A primeira praga transformou as águas do Nilo em sangue." },
+        { q:"Quem interpretou os sonhos do faraó no Egito?", opts:["Moisés","Abraão","José","Daniel"], a:2, exp:"Gênesis 41 – José interpretou os dois sonhos do faraó, prevendo 7 anos de fartura e 7 de fome." },
+        { q:"Em qual rio Jesus foi batizado?", opts:["Eufrates","Nilo","Jordão","Mar Morto"], a:2, exp:"Mateus 3:13 – Jesus foi batizado por João Batista no rio Jordão." },
+        { q:"Quem foi o primeiro rei de Israel?", opts:["Davi","Salomão","Saul","Samuel"], a:2, exp:"1 Samuel 10:24 – Saul foi ungido por Samuel como o primeiro rei de Israel." },
+        { q:"Qual profeta foi levado ao céu num carro de fogo?", opts:["Eliseu","Elias","Ezequiel","Isaías"], a:1, exp:"2 Reis 2:11 – Elias subiu ao céu num redemoinho, com cavalos e carro de fogo." },
+        { q:"Qual é o livro central da Bíblia?", opts:["Salmos","Provérbios","Eclesiastes","Jó"], a:0, exp:"O livro de Salmos está no centro da Bíblia e é o livro mais longo." },
+        { q:"Quantos filhos tinha Jacó?", opts:["10","11","12","13"], a:2, exp:"Gênesis 35:22 – Jacó teve 12 filhos, que se tornaram os patriarcas das 12 tribos de Israel." },
+      ],
+      dificil: [
+        { q:"Qual era o nome da esposa de Abraão antes de ser renomeada?", opts:["Raquel","Sara","Sarai","Rebeca"], a:2, exp:"Gênesis 17:15 – O nome original era Sarai, mas Deus a renomeou para Sara." },
+        { q:"Quantos anos Matusalém viveu, segundo a Bíblia?", opts:["777","900","969","999"], a:2, exp:"Gênesis 5:27 – Matusalém viveu 969 anos, sendo o homem mais velho registrado na Bíblia." },
+        { q:"Qual rei mandou construir o primeiro templo de Jerusalém?", opts:["Davi","Salomão","Roboão","Ezequias"], a:1, exp:"1 Reis 6:1 – Salomão construiu o templo em Jerusalém, levando 7 anos para terminá-lo." },
+        { q:"Qual é o único livro da Bíblia que não menciona o nome de Deus?", opts:["Ester","Rute","Cantares","Filemom"], a:0, exp:"O livro de Ester é famoso por não mencionar explicitamente o nome de Deus em nenhum versículo." },
+        { q:"Quantas cartas o apóstolo Paulo escreveu no Novo Testamento?", opts:["11","13","14","15"], a:1, exp:"Paulo escreveu 13 cartas: Romanos, 1-2 Coríntios, Gálatas, Efésios, Filipenses, Colossenses, 1-2 Tessalonicenses, 1-2 Timóteo, Tito e Filemom." },
+        { q:"Qual profeta profetizou que o Messias nasceria em Belém?", opts:["Isaías","Miquéias","Zacarias","Amós"], a:1, exp:"Miquéias 5:2 – 'E tu, Belém Efrata... de ti me sairá aquele que será soberano em Israel'." },
+        { q:"Qual era o nome hebraico do apóstolo Paulo?", opts:["Barnabé","Silas","Saulo","Timóteo"], a:2, exp:"Atos 13:9 – Paulo era conhecido pelo nome hebraico Saulo antes de ser chamado Paulo." },
+        { q:"Quantos livros tem o Antigo Testamento?", opts:["36","39","40","45"], a:1, exp:"O Antigo Testamento possui 39 livros, desde Gênesis até Malaquias." },
+        { q:"Qual foi a cidade destruída junto com Sodoma?", opts:["Jericó","Gomorra","Nínive","Babel"], a:1, exp:"Gênesis 19:24 – Deus destruiu Sodoma e Gomorra com enxofre e fogo do céu." },
+        { q:"Quem escreveu o livro do Apocalipse?", opts:["Paulo","Pedro","Tiago","João"], a:3, exp:"Apocalipse 1:1 – João recebeu e escreveu a revelação enquanto estava na ilha de Patmos." },
+      ]
+    };
+
+    const END_VERSES = [
+      { t:"Continue estudando a Palavra!", v:'"Lâmpada para os meus pés é tua palavra, e luz para o meu caminho." — Salmos 119:105' },
+      { t:"Bom resultado! Continue crescendo!", v:'"A lei do teu Deus está no meu coração." — Salmos 37:31' },
+      { t:"Excelente! Verdadeiro estudioso da Bíblia!", v:'"Esforça-te, e tem bom ânimo; não temas, nem te espantes." — Josué 1:9' },
+    ];
+
+    let state = { screen:"start", level:"facil", questions:[], current:0, score:0, ll:{ skip:true, half:true, bible:true } };
+
+    function shuffle(arr) { return [...arr].sort(()=>Math.random()-0.5); }
+
+    function startGame(level) {
+      const pool = shuffle(ALL_QUESTIONS[level]).slice(0,7);
+      state = { screen:"game", level, questions:pool, current:0, score:0, ll:{ skip:true, half:true, bible:true } };
+      render();
+    }
+
+    function render() {
+      const root = document.getElementById("quiz-root");
+      if (state.screen === "start") { root.innerHTML = renderStart(); return; }
+      if (state.screen === "end")   { root.innerHTML = renderEnd();   return; }
+      const q   = state.questions[state.current];
+      const pct = ((state.current) / state.questions.length * 100).toFixed(0);
+      root.innerHTML =
+        '<div class="q-header">' +
+          '<div class="q-header-logo">' +
+            '<span class="q-header-cross">✝</span>' +
+            '<div><div class="q-header-brand">IEADA Bible Game<span>Assembleia de Deus – IEADA</span></div></div>' +
+          '</div>' +
+          '<div class="q-score-box">Pontos: ' + state.score + '</div>' +
+        '</div>' +
+        '<div class="q-body">' +
+          '<div class="q-progress-bar"><div class="q-progress-fill" style="width:' + pct + '%"></div></div>' +
+          '<div class="q-meta">' +
+            '<div class="q-number">Pergunta ' + (state.current+1) + ' de ' + state.questions.length + '</div>' +
+            '<div class="q-prize">' + PRIZES[Math.min(state.current, PRIZES.length-1)] + '</div>' +
+          '</div>' +
+          '<div class="q-text">' + q.q + '</div>' +
+          '<div class="q-lifelines">' +
+            '<button class="q-ll" id="ll-skip" ' + (!state.ll.skip?"disabled":"") + ' onclick="useSkip()"><span class="ll-icon">⏭</span>Pular</button>' +
+            '<button class="q-ll" id="ll-half" ' + (!state.ll.half?"disabled":"") + ' onclick="useHalf()"><span class="ll-icon">✂️</span>50/50</button>' +
+            '<button class="q-ll" id="ll-bible" ' + (!state.ll.bible?"disabled":"") + ' onclick="useBible()"><span class="ll-icon">📖</span>Bíblia</button>' +
+          '</div>' +
+          '<div class="q-options" id="opts">' +
+            q.opts.map((o,i)=>'<button class="q-opt" id="opt-'+i+'" onclick="answer('+i+')">' +
+              '<span class="opt-letter">'+["A","B","C","D"][i]+'</span>'+o+'</button>').join("") +
+          '</div>' +
+          '<div class="q-feedback" id="feedback"></div>' +
+          '<button class="q-next" id="nextBtn" onclick="nextQ()">' +
+            (state.current+1 < state.questions.length ? "Próxima Pergunta →" : "Ver Resultado") +
+          '</button>' +
+        '</div>';
+    }
+
+    function renderStart() {
+      return '<div class="q-start">' +
+        '<div class="q-start-cross">✝</div>' +
+        '<div class="q-start-title">ÁGAPE Bible Game</div>' +
+        '<div class="q-start-sub">Quiz Bíblico </div>' +
+        '<div class="q-start-brand">Assembleia de Deus – ÁGAPE</div>' +
+        '<div class="q-levels">' +
+          '<button class="q-level-btn" onclick="startGame(\'facil\')"><span class="lv-icon">📖</span><span class="lv-name">Fácil</span><span class="lv-desc">Iniciante</span></button>' +
+          '<button class="q-level-btn" onclick="startGame(\'medio\')"><span class="lv-icon">✝</span><span class="lv-name">Médio</span><span class="lv-desc">Intermediário</span></button>' +
+          '<button class="q-level-btn" onclick="startGame(\'dificil\')"><span class="lv-icon">🏆</span><span class="lv-name">Difícil</span><span class="lv-desc">Avançado</span></button>' +
+        '</div>' +
+        '<div class="q-start-hint">7 perguntas por rodada • 3 ajudas disponíveis</div>' +
+      '</div>';
+    }
+
+    function renderEnd() {
+      const pct  = Math.round((state.score / state.questions.length) * 100);
+      const icon = pct >= 80 ? "🏆" : pct >= 50 ? "✝" : "📖";
+      const ev   = END_VERSES[pct >= 80 ? 2 : pct >= 50 ? 1 : 0];
+      return '<div class="q-end">' +
+        '<div class="q-end-icon">' + icon + '</div>' +
+        '<div class="q-end-title">' + ev.t + '</div>' +
+        '<div class="q-end-score">' + state.score + '/' + state.questions.length + '</div>' +
+        '<div class="q-end-sub">' + pct + '% de acertos</div>' +
+        '<div class="q-end-prize">' + PRIZES[Math.min(state.score, PRIZES.length-1)] + '</div>' +
+        '<div class="q-end-verse">' + ev.v + '</div>' +
+        '<button class="q-restart" onclick="goStart()">Jogar Novamente</button>' +
+      '</div>';
+    }
+
+    function answer(i) {
+      const q = state.questions[state.current];
+      document.querySelectorAll(".q-opt").forEach(o => o.disabled = true);
+      document.querySelectorAll(".q-ll").forEach(l => l.disabled = true);
+      const fb = document.getElementById("feedback");
+      fb.style.display = "block";
+      if (i === q.a) {
+        document.getElementById("opt-"+i).classList.add("correct");
+        state.score++;
+        fb.style.borderLeftColor = "#1d9e75";
+        fb.innerHTML = "✔ Correto! " + q.exp;
+      } else {
+        document.getElementById("opt-"+i).classList.add("wrong");
+        document.getElementById("opt-"+q.a).classList.add("correct");
+        fb.style.borderLeftColor = "#e24b4a";
+        fb.innerHTML = "✘ Incorreto. " + q.exp;
+      }
+      document.getElementById("nextBtn").style.display = "block";
+    }
+
+    function nextQ() {
+      state.current++;
+      if (state.current >= state.questions.length) state.screen = "end";
+      render();
+    }
+
+    function goStart() { state.screen = "start"; render(); }
+
+    function useSkip() {
+      if (!state.ll.skip) return;
+      state.ll.skip = false;
+      state.current++;
+      if (state.current >= state.questions.length) state.screen = "end";
+      render();
+    }
+
+    function useHalf() {
+      if (!state.ll.half) return;
+      state.ll.half = false;
+      const q = state.questions[state.current];
+      const wrong = [0,1,2,3].filter(i => i !== q.a);
+      shuffle(wrong).slice(0,2).forEach(i => {
+        const btn = document.getElementById("opt-"+i);
+        if (btn) { btn.style.opacity = "0.18"; btn.disabled = true; }
+      });
+      document.getElementById("ll-half").disabled = true;
+    }
+
+    function useBible() {
+      if (!state.ll.bible) return;
+      state.ll.bible = false;
+      const q = state.questions[state.current];
+      const fb = document.getElementById("feedback");
+      fb.style.display = "block";
+      fb.style.borderLeftColor = "rgba(201,168,76,0.5)";
+      fb.innerHTML = "📖 Dica bíblica: " + q.exp;
+      document.getElementById("ll-bible").disabled = true;
+    }
+
+    render();
+  </script>
+</body>
+</html>
