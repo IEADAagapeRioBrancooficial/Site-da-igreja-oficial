@@ -75,7 +75,16 @@
       overflow: hidden;
       box-shadow: 0 16px 60px rgba(183,28,28,0.25);
     }
+.hero-cross img {
+  max-width: 140px;
+  animation: float 3s ease-in-out infinite;
+}
 
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
     /* ── TELA INICIAL ── */
     .q-start {
       display: flex;
@@ -315,7 +324,7 @@
 
   <div class="game-header">
     <a href="index.html" class="game-logo">
-      <span class="cross">✝</span>
+      <span class="cross">img src="IEADA.png" alt=""</span>
       <div>
         <span class="brand">IEADA Bible Game</span>
         <span class="sub">Assembleia de Deus – Ágape</span>
