@@ -15,15 +15,15 @@ const CULTOS = [
     nome: "Nova Esperança",
     dia: "Domingo • 18:00h",
     horario: "Todo Domingo às 18:00",
-    tema: "Ide a todo mundo e pregai o evangelho",
-    tag: "Culto de missões",
+    tema: "minha familia com Deus",
+    tag: "Culto de Familia",
   },        
   {
     nome: "vila 104",
     dia: "Sabado • 19:00h",
     horario: "Todo sabado às 19:00",
-    tema: "Ide a todo mundo e pregai o evangelho",
-    tag: "Culto de missões",
+    tema: "Ceia do senhor",
+    tag: "Culto de Santa Ceia",
   },
   {
     nome: "Mocinha Magalhães",
@@ -36,27 +36,27 @@ const CULTOS = [
     nome: "Nova Esperança ",
     dia: "Quinta • 19:00h ",
     horario: "Toda Quinta às 19:00 ",
-    tema: "Conhecereis a verdade e a verdade vos libertará",
-    tag: "Culto Profética",
+    tema: "Estudo Biblico",
+    tag: "Culto de ensinamento",
   },
   {
     nome: "Vila 104",
     dia: "quarta • 19:00h ",
     horario: "Toda quarta às 19:00",
-    tema: "Escola Biblica",
+    tema: "Estudo Biblico",
     tag: "Culto de ensinamento",
   },
   {
     nome: "Mocinha Magalhães",
     dia: "Quarta • 19:00h",
     horario: "Toda quarta às 19:00",
-    tema: "Escola Biblica",
+    tema: "Estudo Biblico",
     tag: "Culto de ensinamento",
   },
 ];
 
 const AVISOS = [
-  "🙏Os cultos desta semana estão listados acima.",
+  "🙏Esta é a nossa progamação de cultos desta semana(Os cultos desta semana estão listados acima).",
 ];
 
 const IGREJAS = [
