@@ -122,7 +122,16 @@ body {
   90%  { opacity: .3; }
   100% { opacity: 0; transform: translateY(-80vh) scale(.4); }
 }
+.hero-cross img {
+  max-width: 140px;
+  animation: float 3s ease-in-out infinite;
+}
 
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
 /* ornamental lines */
 .hero::before, .hero::after {
   content: ''; position: absolute; top: 0; bottom: 0; width: 1px;
