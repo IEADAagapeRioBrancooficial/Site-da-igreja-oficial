@@ -1,6 +1,6 @@
 // =====================================================
 //  ASSEMBLEIA DE DEUS – IEADA  |  app.js
-//  Versão frontend puro
+//  Versão frontend
 // =====================================================
 
 const CULTOS = [
@@ -8,22 +8,22 @@ const CULTOS = [
     nome: "Mocinha Magalhães",
     dia: "Domingo • 18:00h",
     horario: "Todo Domingo às 18:00",
-    tema: "Minha familia no altar",
-    tag: "Culto de Familia",
+    tema: "Missões para o senhor",
+    tag: "Culto de Missões",
   },
   {
     nome: "Nova Esperança",
     dia: "Domingo • 18:00h",
     horario: "Todo Domingo às 18:00",
-    tema: "minha familia com Deus",
-    tag: "Culto de Familia",
+    tema: "Ide e fazei discípulos",
+    tag: "Culto de Missões",
   },        
   {
     nome: "vila 104",
     dia: "Sabado • 19:00h",
     horario: "Todo sabado às 19:00",
-    tema: "Ceia do senhor",
-    tag: "Culto de Santa Ceia",
+    tema: "Missão do senhor",
+    tag: "Culto de Missões",
   },
   {
     nome: "Mocinha Magalhães",
@@ -36,8 +36,8 @@ const CULTOS = [
     nome: "Nova Esperança ",
     dia: "Quinta • 19:00h ",
     horario: "Toda Quinta às 19:00 ",
-    tema: "Estudo Biblico",
-    tag: "Culto de ensinamento",
+    tema: "Vivendo pela Fé",
+    tag: "Culto de Profetico",
   },
   {
     nome: "Vila 104",
