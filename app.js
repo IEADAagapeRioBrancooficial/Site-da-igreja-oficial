@@ -84,10 +84,11 @@ const IGREJAS = [
 ];
 
 const PASTORES = [
-   {
+ {
     nome: "Pr. Nonato Calacina",
     titulo: "Pastor Estadual",
     igreja: "Sede Nova Esperança",
+    foto: "fotos/nonato.jpg",
     whatsapp: "5568999073699",
     instagram: "https://www.instagram.com/nonatocalacina/?__pwa=1",
   },
@@ -95,6 +96,7 @@ const PASTORES = [
      nome: "Pra. Renilda Araújo",
     titulo: "Pastora Estadual",
     igreja: "Sede Nova Esperança",
+    foto: "fotos/Renilda.jpg",
     whatsapp: "5568996051901",
     instagram: "https://www.instagram.com/renildaaraujo03/?__pwa=1",
   },
@@ -102,6 +104,7 @@ const PASTORES = [
     nome: "Pr. Denis Willian",
     titulo: "Pastor Local",
     igreja: "Mocinha Magalhães",
+    foto: "fotos/denis.jpg",
     whatsapp: "5568992142076",
     instagram: "https://www.instagram.com/ieada_m.m/?__pwa=1",
   },
@@ -109,6 +112,7 @@ const PASTORES = [
     nome: "Pra. Sandra Melo ",
     titulo: "Pastora Local",
     igreja: "Mocinha Magalhães",
+    foto: "fotos/sandra.jpg",
     whatsapp: "5568992504089",
     instagram: "https://www.instagram.com/ieada_m.m/?__pwa=1",
   },
@@ -116,6 +120,7 @@ const PASTORES = [
     nome: "Pr. Jovenilson Melo",
     titulo: "Pastor Local",
     igreja: "Vila 104",
+    foto: "fotos/jove.jpg",
     whatsapp: "5597981262453",
     instagram: "https://www.instagram.com/igreja.4586382/?__pwa=1",
   },
@@ -123,6 +128,7 @@ const PASTORES = [
     nome: "Pra. Maria Conceição",
     titulo: "Pastora Local",
     igreja: "Vila 104",
+    foto: "fotos/com.jpg",
     whatsapp: "5597981262453",
     instagram: "https://www.instagram.com/cr7428762/?__pwa=1",
   },
@@ -130,6 +136,7 @@ const PASTORES = [
     nome: "Pr. Claudio santos ",
     titulo: "Pastor Auxiliar",
     igreja: "Ministerio",
+    foto: "fotos/claudio.jpg",
     whatsapp: "5568999449112",
     instagram: "https://www.instagram.com/claudiosantos2345/?__pwa=1",
   },
