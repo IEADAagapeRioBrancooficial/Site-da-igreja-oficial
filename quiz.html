@@ -50,7 +50,8 @@
       gap: 10px;
       text-decoration: none;
     }
-    .game-logo .cross { font-size: 22px; color: var(--gold); }
+    .game-logo .cross { display: flex; align-items: center; }
+    .game-logo .cross img { height: 38px; width: 38px; object-fit: contain; filter: drop-shadow(0 0 5px rgba(201,168,76,0.5)); }
     .game-logo .brand { font-family: 'Cinzel', serif; font-size: 13px; color: var(--gold-lt); }
     .game-logo .sub   { font-size: 10px; color: rgba(201,168,76,0.6); letter-spacing: .1em; display: block; }
     .back-btn {
@@ -75,16 +76,7 @@
       overflow: hidden;
       box-shadow: 0 16px 60px rgba(183,28,28,0.25);
     }
-.hero-cross img {
-  max-width: 140px;
-  animation: float 3s ease-in-out infinite;
-}
 
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
-}
     /* ── TELA INICIAL ── */
     .q-start {
       display: flex;
@@ -99,11 +91,17 @@
     .q-start-brand { font-size: 11px; color: rgba(201,168,76,0.55); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 36px; }
     .q-levels {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
       gap: 12px;
       width: 100%;
       margin-bottom: 28px;
     }
+    .q-level-total {
+      grid-column: 1 / -1;
+      background: rgba(201,168,76,0.1);
+      border-color: rgba(201,168,76,0.45);
+    }
+    .q-level-total:hover { background: rgba(201,168,76,0.22) !important; }
     .q-level-btn {
       padding: 18px 8px;
       border-radius: 10px;
@@ -124,15 +122,30 @@
     .q-header {
       background: rgba(0,0,0,0.4);
       border-bottom: 1px solid rgba(201,168,76,0.25);
-      padding: 14px 22px;
+      padding: 12px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 8px;
     }
     .q-header-logo { display: flex; align-items: center; gap: 8px; }
     .q-header-cross { font-size: 18px; color: var(--gold); }
     .q-header-brand { font-family: 'Cinzel', serif; font-size: 12px; color: var(--gold-lt); }
     .q-header-brand span { color: rgba(255,255,255,0.4); font-size: 10px; display: block; }
+    .q-menu-btn {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      color: rgba(255,255,255,0.45);
+      background: none;
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 5px 11px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: color .2s, border-color .2s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .q-menu-btn:hover { color: var(--gold); border-color: rgba(201,168,76,0.45); }
     .q-score-box {
       background: rgba(201,168,76,0.12);
       border: 1px solid rgba(201,168,76,0.35);
@@ -261,6 +274,10 @@
       transition: opacity .2s, transform .15s;
     }
     .q-next:hover { opacity: .85; transform: translateY(-1px); }
+    /* botões dentro do wrapper do modo total */
+    .q-next-row { display: flex; gap: 10px; }
+    .q-next-row .q-next { display: block; width: auto; flex: 1; }
+    .q-next-row .q-next.grow2 { flex: 2; }
 
     /* ── TELA FINAL ── */
     .q-end {
@@ -287,8 +304,9 @@
       border-left: 3px solid rgba(201,168,76,0.4);
       max-width: 440px;
     }
+    .q-end-btns { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 320px; }
     .q-restart {
-      padding: 13px 44px;
+      padding: 13px 24px;
       background: linear-gradient(135deg, var(--red-mid), var(--red-dark));
       border: 1px solid var(--gold);
       border-radius: 8px;
@@ -297,9 +315,16 @@
       font-size: 14px;
       letter-spacing: .06em;
       cursor: pointer;
-      transition: opacity .2s;
+      transition: opacity .2s, transform .15s;
+      width: 100%;
     }
-    .q-restart:hover { opacity: .85; }
+    .q-restart:hover { opacity: .85; transform: translateY(-1px); }
+    .q-restart-menu {
+      background: transparent;
+      border-color: rgba(201,168,76,0.35);
+      color: rgba(201,168,76,0.7);
+    }
+    .q-restart-menu:hover { background: rgba(201,168,76,0.08); opacity: 1; }
 
     /* ── FOOTER ── */
     .game-footer {
@@ -324,7 +349,7 @@
 
   <div class="game-header">
     <a href="index.html" class="game-logo">
-      <span class="cross">"✝️"</span>
+      <span class="cross"><img src="logo.png" alt="Logo IEADA"></span>
       <div>
         <span class="brand">IEADA Bible Game</span>
         <span class="sub">Assembleia de Deus – Ágape</span>
@@ -354,8 +379,6 @@
         { q:"Qual é o versículo mais curto da Bíblia?", opts:["Orai!","Jesus chorou.","Louvai ao Senhor.","Amém."], a:1, exp:"João 11:35 – 'Jesus chorou' é considerado o versículo mais curto da Bíblia." },
         { q:"Quem viu a sarça ardente?", opts:["Abraão","Moisés","Elias","Josué"], a:1, exp:"Êxodo 3:2 – O Anjo do Senhor apareceu a Moisés em uma chama no meio da sarça." },
 
-{ q:"Quem construiu a arca?", opts:["Abraão","Noé","Ló","Isaque"], a:1, exp:"Gênesis 6:14 – Deus ordenou a Noé que construísse uma arca de madeira." },
-
 { q:"Quem foi jogado na cova dos leões?", opts:["José","Daniel","Moisés","Elias"], a:1, exp:"Daniel 6:16 – Daniel foi lançado na cova dos leões por ordem do rei." },
 
 { q:"Quem era o pai de Davi?", opts:["Saul","Jessé","Samuel","Eli"], a:1, exp:"1 Samuel 16:1 – Davi era filho de Jessé, de Belém." },
@@ -370,7 +393,17 @@
 
 { q:"Quem construiu o templo de Jerusalém?", opts:["Davi","Salomão","Saul","Elias"], a:1, exp:"1 Reis 6:1 – Salomão começou a construir o templo do Senhor." },
 
-{ q:"Quem batizou Jesus?", opts:["Pedro","João Batista","Paulo","Tiago"], a:1, exp:"Mateus 3:13 – Jesus foi batizado por João no rio Jordão." }
+{ q:"Quem batizou Jesus?", opts:["Pedro","João Batista","Paulo","Tiago"], a:1, exp:"Mateus 3:13 – Jesus foi batizado por João no rio Jordão." },
+        { q:"Quantos dias Jesus ficou no deserto sendo tentado?", opts:["7 dias","20 dias","40 dias","90 dias"], a:2, exp:"Mateus 4:2 – Jesus jejuou quarenta dias e quarenta noites no deserto." },
+        { q:"Qual era a profissão de José, pai adotivo de Jesus?", opts:["Pescador","Carpinteiro","Pastor","Cobrador de impostos"], a:1, exp:"Marcos 6:3 – Jesus era chamado de filho do carpinteiro José." },
+        { q:"Quem caminhou sobre as águas com Jesus?", opts:["Tiago","João","Pedro","Paulo"], a:2, exp:"Mateus 14:29 – Pedro saiu do barco e andou sobre as águas em direção a Jesus." },
+        { q:"Qual foi o primeiro milagre de Jesus?", opts:["Cura de leproso","Multiplicação dos pães","Transformar água em vinho","Ressurreição de Lázaro"], a:2, exp:"João 2:1-11 – Jesus transformou água em vinho nas bodas de Caná da Galileia." },
+        { q:"Qual animal falou com Balaão?", opts:["Serpente","Jumenta","Leão","Pomba"], a:1, exp:"Números 22:28 – O Senhor abriu a boca da jumenta e ela falou com Balaão." },
+        { q:"Em qual monte Moisés recebeu os Dez Mandamentos?", opts:["Monte Carmelo","Monte Sinai","Monte Sião","Monte das Oliveiras"], a:1, exp:"Êxodo 19:20 – O Senhor desceu sobre o Monte Sinai e entregou os mandamentos a Moisés." },
+        { q:"Quem sonhou com uma escada chegando ao céu?", opts:["José","Moisés","Abraão","Jacó"], a:3, exp:"Gênesis 28:12 – Jacó sonhou com uma escada apoiada na terra cujo topo tocava o céu." },
+        { q:"Em qual jardim Jesus orou antes de ser preso?", opts:["Getsêmani","Éden","Siloé","Betânia"], a:0, exp:"Mateus 26:36 – Jesus foi com seus discípulos a um lugar chamado Getsêmani." },
+        { q:"Qual era o nome do discípulo amado de Jesus?", opts:["Pedro","Tiago","Mateus","João"], a:3, exp:"João 21:20 – O discípulo amado era João, que se reclinou sobre Jesus na última ceia." },
+        { q:"Quem foi o irmão mais velho de Moisés?", opts:["Josué","Calebe","Arão","Gideão"], a:2, exp:"Êxodo 7:7 – Arão era três anos mais velho que Moisés e seu porta-voz diante do faraó." }
       ],
       medio: [
         { q:"Quem escreveu a maior parte dos Salmos?", opts:["Salomão","Moisés","Davi","Asafe"], a:2, exp:"A maioria dos 150 Salmos tem Davi como autor, sendo ele o maior salmista da Bíblia." },
@@ -402,6 +435,16 @@
 
 { q:"Quem escreveu Apocalipse?", opts:["Pedro","João","Paulo","Tiago"], a:1, exp:"Apocalipse 1:1 – A revelação foi dada a João." },
         { q:"Quantos filhos tinha Jacó?", opts:["10","11","12","13"], a:2, exp:"Gênesis 35:22 – Jacó teve 12 filhos, que se tornaram os patriarcas das 12 tribos de Israel." },
+        { q:"Quem foi o primeiro mártir cristão do Novo Testamento?", opts:["Paulo","Estêvão","Tiago","Barnabé"], a:1, exp:"Atos 7:60 – Estêvão foi apedrejado até a morte, tornando-se o primeiro mártir cristão." },
+        { q:"Qual profetisa liderou Israel junto ao general Barac?", opts:["Hulda","Miriã","Débora","Ana"], a:2, exp:"Juízes 4:4 – Débora era profetisa e juíza de Israel, e liderou junto a Barac contra Sísera." },
+        { q:"Em que cidade Jesus realizou seu primeiro milagre?", opts:["Jerusalém","Belém","Caná da Galileia","Nazaré"], a:2, exp:"João 2:1 – Jesus realizou seu primeiro sinal em Caná da Galileia, transformando água em vinho." },
+        { q:"Qual era o nome do filho de Davi que se rebelou contra ele?", opts:["Salomão","Absalão","Adonias","Amnom"], a:1, exp:"2 Samuel 15:10 – Absalão enviou espiões por todas as tribos de Israel para proclamar-se rei." },
+        { q:"Quantos livros tem a Bíblia completa?", opts:["60","63","66","72"], a:2, exp:"A Bíblia possui 66 livros no total: 39 no Antigo Testamento e 27 no Novo Testamento." },
+        { q:"Quem liderou a rebelião contra Moisés no deserto e foi engolido pela terra?", opts:["Corá","Miriã","Arão","Balaque"], a:0, exp:"Números 16:32 – A terra abriu a boca e tragou Corá, Datã e Abirão por se rebelarem contra Moisés." },
+        { q:"Qual é o nome do sumo sacerdote que julgou Jesus?", opts:["Anás","Caifás","Herodes","Simão"], a:1, exp:"Mateus 26:57 – Os que prenderam Jesus o levaram a Caifás, o sumo sacerdote." },
+        { q:"Quantas virgens sábias havia na parábola das dez virgens?", opts:["3","5","7","8"], a:1, exp:"Mateus 25:2 – Das dez virgens, cinco eram sábias e cinco eram tolas." },
+        { q:"Quem pregou no Pentecostes e converteu cerca de 3.000 pessoas?", opts:["Paulo","João","Pedro","Tiago"], a:2, exp:"Atos 2:41 – Os que receberam a pregação de Pedro foram batizados: cerca de três mil almas." },
+        { q:"Qual rei de Israel se casou com Jezabel?", opts:["Davi","Salomão","Acabe","Jeú"], a:2, exp:"1 Reis 16:31 – Acabe tomou por mulher Jezabel, filha de Etbaal, rei dos sidônios." }
       ],
       dificil: [
         { q:"Qual era o nome da esposa de Abraão antes de ser renomeada?", opts:["Raquel","Sara","Sarai","Rebeca"], a:2, exp:"Gênesis 17:15 – O nome original era Sarai, mas Deus a renomeou para Sara." },
@@ -432,7 +475,17 @@
 
 { q:"Quem escreveu Provérbios?", opts:["Davi","Salomão","Moisés","Isaías"], a:1, exp:"Provérbios 1:1 – Provérbios de Salomão, filho de Davi." },
 
-{ q:"Quem foi o rei mais sábio?", opts:["Davi","Salomão","Saul","Josias"], a:1, exp:"1 Reis 4:29 – Deus deu sabedoria extraordinária a Salomão." }
+{ q:"Quem foi o rei mais sábio?", opts:["Davi","Salomão","Saul","Josias"], a:1, exp:"1 Reis 4:29 – Deus deu sabedoria extraordinária a Salomão." },
+        { q:"Qual era a profissão de Lucas, autor do terceiro Evangelho?", opts:["Pescador","Médico","Cobrador de impostos","Carpinteiro"], a:1, exp:"Colossenses 4:14 – Lucas é chamado de 'o médico amado' pelo apóstolo Paulo." },
+        { q:"Qual era o nome do servo a quem Pedro cortou a orelha?", opts:["Anás","Malco","Marcos","Simeão"], a:1, exp:"João 18:10 – Simão Pedro tirou a espada e feriu o servo do sumo sacerdote, chamado Malco." },
+        { q:"Quantos anos viveu Noé?", opts:["750 anos","850 anos","950 anos","1000 anos"], a:2, exp:"Gênesis 9:29 – Todos os dias de Noé foram novecentos e cinquenta anos." },
+        { q:"Qual era o nome da rainha que visitou Salomão para testar sua sabedoria?", opts:["Rainha do Egito","Rainha de Sabá","Rainha da Babilônia","Rainha da Pérsia"], a:1, exp:"1 Reis 10:1 – A rainha de Sabá ouviu a fama de Salomão e veio testá-lo com perguntas difíceis." },
+        { q:"Quantos anos tinha Josué quando morreu?", opts:["100 anos","110 anos","120 anos","130 anos"], a:1, exp:"Josué 24:29 – Josué, filho de Num, morreu com cento e dez anos de idade." },
+        { q:"Qual era o nome babilônico dado a Daniel?", opts:["Beltessazar","Sadraque","Mesaque","Abede-Nego"], a:0, exp:"Daniel 1:7 – O chefe dos oficiais deu ao príncipe Daniel o nome de Beltessazar." },
+        { q:"Quem era o pai da esposa de Moisés, Zípora?", opts:["Jetro","Aminadabe","Naor","Ló"], a:0, exp:"Êxodo 3:1 – Moisés apascentava as ovelhas de Jetro, seu sogro, sacerdote de Midiã." },
+        { q:"Em qual ilha o apóstolo João recebeu a visão do Apocalipse?", opts:["Chipre","Malta","Creta","Patmos"], a:3, exp:"Apocalipse 1:9 – João estava na ilha chamada Patmos por causa da Palavra de Deus." },
+        { q:"Quantas pragas Deus enviou ao Egito?", opts:["7","8","10","12"], a:2, exp:"Êxodo 7–12 – Deus enviou dez pragas ao Egito para libertar Israel da escravidão." },
+        { q:"A esposa de Ló virou estátua de quê ao olhar para trás?", opts:["Pedra","Sal","Gelo","Pó"], a:1, exp:"Gênesis 19:26 – A mulher de Ló olhou para trás e tornou-se uma estátua de sal." }
       ]
     };
 
@@ -442,24 +495,73 @@
       { t:"Excelente! Verdadeiro estudioso da Bíblia!", v:'"Esforça-te, e tem bom ânimo; não temas, nem te espantes." — Josué 1:9' },
     ];
 
-    let state = { screen:"start", level:"facil", questions:[], current:0, score:0, ll:{ skip:true, half:true, bible:true } };
+    let state = { screen:"start", level:"facil", questions:[], current:0, score:0, answeredCount:0, ll:{ skip:true, half:true, bible:true } };
 
     function shuffle(arr) { return [...arr].sort(()=>Math.random()-0.5); }
 
     function startGame(level) {
-      const pool = shuffle(ALL_QUESTIONS[level]).slice(0,7);
-      state = { screen:"game", level, questions:pool, current:0, score:0, ll:{ skip:true, half:true, bible:true } };
+      const BATCH   = 10;
+      const isTotal = level === 'total';
+
+      const sourceQ = isTotal
+        ? [...ALL_QUESTIONS.facil, ...ALL_QUESTIONS.medio, ...ALL_QUESTIONS.dificil]
+        : ALL_QUESTIONS[level];
+
+      const key  = 'usedQ_' + level;
+      let used   = JSON.parse(localStorage.getItem(key) || '[]');
+
+      let available = sourceQ
+        .map((q, i) => ({ q, i }))
+        .filter(({ i }) => !used.includes(i));
+
+      const minNeeded = isTotal ? 1 : BATCH;
+      if (available.length < minNeeded) {
+        used = [];
+        available = sourceQ.map((q, i) => ({ q, i }));
+      }
+
+      const picked = isTotal ? shuffle(available) : shuffle(available).slice(0, BATCH);
+      localStorage.setItem(key, JSON.stringify([...used, ...picked.map(p => p.i)]));
+
+      state = {
+        screen: "game", level,
+        questions: picked.map(p => p.q),
+        current: 0, score: 0, answeredCount: 0,
+        ll: { skip: true, half: true, bible: true }
+      };
       render();
     }
 
     function render() {
-      const root = document.getElementById("quiz-root");
+      const root    = document.getElementById("quiz-root");
       if (state.screen === "start") { root.innerHTML = renderStart(); return; }
       if (state.screen === "end")   { root.innerHTML = renderEnd();   return; }
-      const q   = state.questions[state.current];
-      const pct = ((state.current) / state.questions.length * 100).toFixed(0);
+      const q       = state.questions[state.current];
+      const isTotal = state.level === 'total';
+      const pct     = ((state.current) / state.questions.length * 100).toFixed(0);
+
+      const metaNum = isTotal
+        ? '<div class="q-number">Pergunta ' + (state.current+1) + '</div>'
+        : '<div class="q-number">Pergunta ' + (state.current+1) + ' de ' + state.questions.length + '</div>';
+
+      const metaPrize = isTotal
+        ? '<div class="q-prize">✔ ' + state.score + ' acerto' + (state.score !== 1 ? 's' : '') + '</div>'
+        : '<div class="q-prize">' + PRIZES[Math.min(state.current, PRIZES.length-1)] + '</div>';
+
+      const nextBtns = isTotal
+        ? '<div id="nextBtn" style="display:none">' +
+            '<div class="q-next-row">' +
+              '<button class="q-next" onclick="endGame()">⏹ Encerrar</button>' +
+              '<button class="q-next grow2" onclick="nextQ()">Próxima Pergunta →</button>' +
+            '</div>' +
+          '</div>'
+        : '<button class="q-next" id="nextBtn" onclick="nextQ()">' +
+            (state.current+1 < state.questions.length ? "Próxima Pergunta →" : "Ver Resultado") +
+          '</button>';
+
       root.innerHTML =
         '<div class="q-header">' +
+          '<button class="q-menu-btn" onclick="goStart()">← Menu</button>' +
           '<div class="q-header-logo">' +
             '<span class="q-header-cross">✝</span>' +
             '<div><div class="q-header-brand">IEADA Bible Game<span>Assembleia de Deus – IEADA</span></div></div>' +
@@ -468,10 +570,7 @@
         '</div>' +
         '<div class="q-body">' +
           '<div class="q-progress-bar"><div class="q-progress-fill" style="width:' + pct + '%"></div></div>' +
-          '<div class="q-meta">' +
-            '<div class="q-number">Pergunta ' + (state.current+1) + ' de ' + state.questions.length + '</div>' +
-            '<div class="q-prize">' + PRIZES[Math.min(state.current, PRIZES.length-1)] + '</div>' +
-          '</div>' +
+          '<div class="q-meta">' + metaNum + metaPrize + '</div>' +
           '<div class="q-text">' + q.q + '</div>' +
           '<div class="q-lifelines">' +
             '<button class="q-ll" id="ll-skip" ' + (!state.ll.skip?"disabled":"") + ' onclick="useSkip()"><span class="ll-icon">⏭</span>Pular</button>' +
@@ -483,9 +582,7 @@
               '<span class="opt-letter">'+["A","B","C","D"][i]+'</span>'+o+'</button>').join("") +
           '</div>' +
           '<div class="q-feedback" id="feedback"></div>' +
-          '<button class="q-next" id="nextBtn" onclick="nextQ()">' +
-            (state.current+1 < state.questions.length ? "Próxima Pergunta →" : "Ver Resultado") +
-          '</button>' +
+          nextBtns +
         '</div>';
     }
 
@@ -493,29 +590,38 @@
       return '<div class="q-start">' +
         '<div class="q-start-cross">✝</div>' +
         '<div class="q-start-title">ÁGAPE Bible Game</div>' +
-        '<div class="q-start-sub">Quiz Bíblico </div>' +
+        '<div class="q-start-sub">Quiz Bíblico</div>' +
         '<div class="q-start-brand">Assembleia de Deus – ÁGAPE</div>' +
         '<div class="q-levels">' +
           '<button class="q-level-btn" onclick="startGame(\'facil\')"><span class="lv-icon">📖</span><span class="lv-name">Fácil</span><span class="lv-desc">Iniciante</span></button>' +
           '<button class="q-level-btn" onclick="startGame(\'medio\')"><span class="lv-icon">✝</span><span class="lv-name">Médio</span><span class="lv-desc">Intermediário</span></button>' +
           '<button class="q-level-btn" onclick="startGame(\'dificil\')"><span class="lv-icon">🏆</span><span class="lv-name">Difícil</span><span class="lv-desc">Avançado</span></button>' +
+          '<button class="q-level-btn q-level-total" onclick="startGame(\'total\')"><span class="lv-icon">🔥</span><span class="lv-name">Desafio Total</span><span class="lv-desc">Fácil ao Difícil • Pare quando quiser</span></button>' +
         '</div>' +
-        '<div class="q-start-hint">7 perguntas por rodada • 3 ajudas disponíveis</div>' +
+        '<div class="q-start-hint">10 perguntas por rodada • 3 ajudas disponíveis</div>' +
       '</div>';
     }
 
     function renderEnd() {
-      const pct  = Math.round((state.score / state.questions.length) * 100);
-      const icon = pct >= 80 ? "🏆" : pct >= 50 ? "✝" : "📖";
-      const ev   = END_VERSES[pct >= 80 ? 2 : pct >= 50 ? 1 : 0];
+      const isTotal  = state.level === 'total';
+      const answered = isTotal ? state.answeredCount : state.questions.length;
+      const pct      = answered > 0 ? Math.round((state.score / answered) * 100) : 0;
+      const icon     = pct >= 80 ? "🏆" : pct >= 50 ? "✝" : "📖";
+      const ev       = END_VERSES[pct >= 80 ? 2 : pct >= 50 ? 1 : 0];
+      const prizeRow = isTotal
+        ? '<div class="q-end-prize">' + answered + ' perguntas respondidas</div>'
+        : '<div class="q-end-prize">' + PRIZES[Math.min(state.score, PRIZES.length-1)] + '</div>';
       return '<div class="q-end">' +
         '<div class="q-end-icon">' + icon + '</div>' +
         '<div class="q-end-title">' + ev.t + '</div>' +
-        '<div class="q-end-score">' + state.score + '/' + state.questions.length + '</div>' +
+        '<div class="q-end-score">' + state.score + '/' + answered + '</div>' +
         '<div class="q-end-sub">' + pct + '% de acertos</div>' +
-        '<div class="q-end-prize">' + PRIZES[Math.min(state.score, PRIZES.length-1)] + '</div>' +
+        prizeRow +
         '<div class="q-end-verse">' + ev.v + '</div>' +
-        '<button class="q-restart" onclick="goStart()">Jogar Novamente</button>' +
+        '<div class="q-end-btns">' +
+          '<button class="q-restart" onclick="startGame(state.level)">Jogar Novamente</button>' +
+          '<button class="q-restart q-restart-menu" onclick="goStart()">← Escolher Nível</button>' +
+        '</div>' +
       '</div>';
     }
 
@@ -536,6 +642,7 @@
         fb.style.borderLeftColor = "#e24b4a";
         fb.innerHTML = "✘ Incorreto. " + q.exp;
       }
+      state.answeredCount++;
       document.getElementById("nextBtn").style.display = "block";
     }
 
@@ -546,6 +653,8 @@
     }
 
     function goStart() { state.screen = "start"; render(); }
+
+    function endGame() { state.screen = "end"; render(); }
 
     function useSkip() {
       if (!state.ll.skip) return;
