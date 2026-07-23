@@ -1,62 +1,37 @@
 // =====================================================
-//  ASSEMBLEIA DE DEUS – IEADA  |  app.js
-//  Versão frontend
-// =====================================================
+//  ASSEMBLEIA DE DEUS – IEADA  |
+// ========================b=============================
 
 const CULTOS = [
   {
-    nome: "Mocinha Magalhães",
-    dia: "Domingo • 18:00h",
-    horario: "Todo Domingo às 18:00",
-    tema: "Culto Profético",
-    tag: "Culto profético",
-  },
-  {
     nome: "Nova Esperança",
-    dia: "Domingo • 18:00h",
-    horario: "Todo Domingo às 18:00",
-    tema: "Culto Profético",
-    tag: "Culto Profético",
-  },        
-  {
-    nome: "vila 104",
-    dia: "Sabado • 19:00h",
-    horario: "Todo sabado às 19:00",
-    tema: "Culto Profético ",
-    tag: "Culto Profético",
+    endereco: "Rua Vitória, 257 – Nova Esperança",
+    dias: [
+      { dia: "Domingo", horario: "18:00" },
+      { dia: "Quinta", horario: "19:00" },
+    ],
   },
   {
     nome: "Mocinha Magalhães",
-    dia: "sexta • 19:00h ",
-    horario: "Toda Sexta às 19:00 ",
-    tema: "Curas e libertações",
-    tag: "Culto de libertação",
-  },
-  {
-    nome: "Nova Esperança ",
-    dia: "Quinta • 19:00h ",
-    horario: "Toda Quinta às 19:00 ",
-    tema: "o amor de Deus",
-    tag: "Culto de Discipulado",
+    endereco: "Rua do Caju, 380 – Mocinha Magalhães",
+    dias: [
+      { dia: "Domingo", horario: "18:00" },
+      { dia: "Quarta", horario: "19:00" },
+      { dia: "Sexta", horario: "19:00" },
+    ],
   },
   {
     nome: "Vila 104",
-    dia: "quarta • 19:00h ",
-    horario: "Toda quarta às 19:00",
-    tema: "Estudo Biblico",
-    tag: "Culto de ensinamento",
-  },
-  {
-    nome: "Mocinha Magalhães",
-    dia: "Quarta • 19:00h",
-    horario: "Toda quarta às 19:00",
-    tema: "Estudo Biblico",
-    tag: "Culto de ensinamento",
+    endereco: "BR 317, Km 104",
+    dias: [
+      { dia: "Quarta", horario: "19:00" },
+      { dia: "Sábado", horario: "19:00" },
+    ],
   },
 ];
 
 const AVISOS = [
-  "🙏Esta é a nossa progamação de cultos desta semana(Os cultos desta semana estão listados acima).",
+  "🙏Os cultos desta semana estão listados acima.",
 ];
 
 const IGREJAS = [
@@ -66,6 +41,7 @@ const IGREJAS = [
     instagram: "https://www.instagram.com/ieada.ac/?__pwa=1",
     user: "@ieada_ac",
     icone: "⛪",
+    foto: "fotos/igreja-sede.jpg",
   },
   {
     nome: "AD – Mocinha Magalhães ",
@@ -73,6 +49,7 @@ const IGREJAS = [
     instagram: "https://www.instagram.com/ieada_m.m/?__pwa=1",
     user: "@ieada_m.m",
     icone: "🕊️",
+    foto: "fotos/igreja-mocinha.jpg",
   },
   {
     nome: "AD – Vila 104  ",
@@ -80,11 +57,12 @@ const IGREJAS = [
     instagram: "https://www.instagram.com/igreja.4586382/?__pwa=1",
     user: "@igreja.4586382",
     icone: "✝️",
+    foto: "fotos/igreja-vila104.jpg",
   },
 ];
 
 const PASTORES = [
- {
+    {
     nome: "Pr. Nonato Calacina",
     titulo: "Pastor Estadual",
     igreja: "Sede Nova Esperança",
@@ -141,6 +119,7 @@ const PASTORES = [
     instagram: "https://www.instagram.com/claudiosantos2345/?__pwa=1",
   },
 ];
+
 
 // ─── VERSÍCULOS DIÁRIOS ──────────────────────────────
 const VERSICULOS = [
@@ -263,18 +242,22 @@ function setPalavra() {
   card.innerHTML = '<p class="palavra-text">"' + v.texto + '"</p><span class="palavra-ref">— ' + v.ref + '</span>';
 }
 
-// ─── CULTOS GRID ─────────────────────────────────────
+// ─── CULTOS (lugar, dia e horário) ───────────────────
 function renderCultos() {
   var grid = document.getElementById("cultosGrid");
   CULTOS.forEach(function(c) {
+    var diasHTML = c.dias.map(function(d) {
+      return '<li>' + d.dia + ' às ' + d.horario + '</li>';
+    }).join('');
     var el = document.createElement("div");
     el.className = "culto-card reveal";
     el.innerHTML =
-      '<div class="culto-dia">' + c.dia + '</div>' +
       '<div class="culto-nome">' + c.nome + '</div>' +
-      '<div class="culto-horario"><i class="fas fa-clock" style="color:var(--gold);margin-right:6px"></i>' + c.horario + '</div>' +
-      '<div class="culto-tema"><i class="fas fa-bible" style="color:var(--gold);margin-right:6px"></i>Tema: ' + c.tema + '</div>' +
-      '<span class="culto-tag">' + c.tag + '</span>';
+      '<ul class="culto-dia" style="list-style:none;padding:0;margin:8px 0">' +
+        '<li style="font-weight:600;margin-bottom:4px"><i class="fas fa-calendar-day" style="color:var(--gold);margin-right:6px"></i>Dias de culto:</li>' +
+        diasHTML +
+      '</ul>' +
+      '<div class="culto-horario"><i class="fas fa-map-marker-alt" style="color:var(--gold);margin-right:6px"></i>' + c.endereco + '</div>';
     grid.appendChild(el);
   });
 }
@@ -297,7 +280,9 @@ function renderIgrejas() {
     el.className = "igreja-card reveal";
     el.innerHTML =
       '<div class="igreja-thumb">' +
-        '<div class="igreja-thumb-inner">' +
+        '<img src="' + ig.foto + '" alt="' + ig.nome + '" class="igreja-foto" ' +
+          'onerror="this.style.display=\'none\'; this.nextElementSibling.style.display=\'flex\';">' +
+        '<div class="igreja-thumb-inner" style="display:none">' +
           '<div class="igreja-thumb-icon">' + ig.icone + '</div>' +
           '<div class="igreja-thumb-label">' + ig.user + '</div>' +
         '</div>' +
@@ -320,18 +305,29 @@ function renderPastores() {
   PASTORES.forEach(function(p) {
     var el = document.createElement("div");
     el.className = "pastor-card reveal";
+
+    // Avatar: foto ou ícone fallback
+    var avatarHTML = p.foto
+      ? '<div class="pastor-avatar pastor-avatar--foto">' +
+          '<img src="' + p.foto + '" alt="Foto de ' + p.nome + '" ' +
+          'onerror="this.parentElement.innerHTML=\'<i class=\\\"fas fa-user-tie\\\"></i>\'">' +
+        '</div>'
+      : '<div class="pastor-avatar"><i class="fas fa-user-tie"></i></div>';
+
     el.innerHTML =
-      '<div class="pastor-avatar"><i class="fas fa-user-tie"></i></div>' +
+      avatarHTML +
       '<div class="pastor-titulo">' + p.titulo + '</div>' +
       '<div class="pastor-nome">' + p.nome + '</div>' +
       '<div class="pastor-igreja"><i class="fas fa-church" style="margin-right:5px"></i>' + p.igreja + '</div>' +
       '<div class="pastor-contatos">' +
-        '<a href="https://wa.me/' + p.whatsapp + '" target="_blank" class="contato-btn whatsapp">' +
-          '<i class="fab fa-whatsapp"></i> WhatsApp' +
-        '</a>' +
-        '<a href="' + p.instagram + '" target="_blank" class="contato-btn instagram-btn">' +
-          '<i class="fab fa-instagram"></i> Instagram' +
-        '</a>' +
+        (p.whatsapp
+          ? '<a href="https://wa.me/' + p.whatsapp + '" target="_blank" class="contato-btn whatsapp">' +
+              '<i class="fab fa-whatsapp"></i> WhatsApp</a>'
+          : '') +
+        (p.instagram
+          ? '<a href="' + p.instagram + '" target="_blank" class="contato-btn instagram-btn">' +
+              '<i class="fab fa-instagram"></i> Instagram</a>'
+          : '') +
       '</div>';
     grid.appendChild(el);
   });
