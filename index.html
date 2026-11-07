@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IEADA – RIO BRANCO AC</title>
+  <title>Assembleia de Deus – IEADA</title>
+
+<meta name="description" content="Site Oficial da Assembleia de Deus Ágape - Rio Branco. Cultos, programação, palavra do dia, igrejas e contato.">
+
+<meta property="og:title" content="Assembleia de Deus Ágape - IEADA">
+<meta property="og:description" content="Venha adorar conosco. Confira cultos, programação e informações da igreja.">
+<meta property="og:image" content="https://ieadaagaperiobrancooficial.github.io/Site-da-igreja-oficial/logo.png">
+<meta property="og:url" content="https://ieadaagaperiobrancooficial.github.io/Site-da-igreja-oficial/">
+<meta property="og:type" content="website">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Assembleia de Deus Ágape - IEADA">
+<meta name="twitter:description" content="Site Oficial da Assembleia de Deus Ágape.">
+<meta name="twitter:image" content="https://ieadaagaperiobrancooficial.github.io/Site-da-igreja-oficial/logo.png">
+
+<link rel="icon" type="image/png" href="logo.png">
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="desktop.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/app-apple-180.png">
+  <meta name="apple-mobile-web-app-title" content="IEADA Ágape">
+  <meta name="theme-color" content="#190d0a">
+</head>
+<body class="site-home">
+
+  <!-- HEADER -->
+  <header id="header">
+    <div class="header-inner">
+      <div class="logo-area">
+        <img src="logo.png" alt="Logo IEADA" class="logo-img" id="logoImg" />
+        <div class="logo-text">
+          <span class="logo-title">Assembleia de Deus</span>
+          <span class="logo-sub">IEADA – Rio Branco-ac</span>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="#cultos">Cultos</a>
+        <a href="#palavra">Palavra</a>
+        <a href="#igrejas">Igrejas</a>
+        <a href="#pastores">Pastores</a>
+        <a href="sobre.html">Sobre Nós</a>
+        <a href="estudos.html">Estudos Bíblicos</a>
+        <a href="#footer">Ver mais</a>
+        <a class="desktop-nav-link" href="apresentacao.html"><i class="fa-solid fa-display" aria-hidden="true"></i> Datashow</a>
+      </nav>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Menu" aria-controls="mobileNav" aria-expanded="false"><i class="fas fa-bars" aria-hidden="true"></i></button>
+    </div>
+    <nav class="mobile-nav" id="mobileNav">
+      <a href="#cultos">Cultos</a>
+      <a href="#palavra">Palavra</a>
+      <a href="#igrejas">Igrejas</a>
+      <a href="#pastores">Pastores</a>
+      <a href="#footer">Ver mais</a>
+      <a href="estudos.html">Estudos Bíblicos</a>
+
+      
+    <a href="apresentacao.html">Central Datashow</a>
+    </nav>
+   
+
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-particles" id="particles"></div>
+    <div class="hero-content">
+      <div class="hero-cross"><img src="logo.png" alt=""></div>
+      <h1 class="hero-title">Assembleia de Deus <i>ÁGAPE</i></h1>
+      <p class="hero-verse" id="heroVerse">Carregando versículo…</p>
+      <a href="#cultos" class="btn-hero">Ver Próximos Cultos</a>
+      <a href="#cultos" class="next-service" id="nextService" hidden>
+        <span class="service-icon"><i class="fa-regular fa-calendar" aria-hidden="true"></i></span>
+        <span>
+          <span class="service-label">Próximo culto</span>
+          <strong id="nextServiceTime"></strong>
+          <span id="nextServiceChurch"></span>
+        </span>
+        <span class="service-arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+    <aside class="desktop-tools" aria-labelledby="desktop-tools-title">
+      <p class="tools-kicker">Recursos da igreja</p>
+      <h2 id="desktop-tools-title">Leitura, louvor e estudo</h2>
+      <nav aria-label="Ferramentas bíblicas">
+        <a href="biblia.html"><i class="fa-solid fa-book-bible" aria-hidden="true"></i><strong>Bíblia Sagrada</strong><span>Leia por livro, capítulo e versículo.</span></a>
+        <a href="harpa.html"><i class="fa-solid fa-music" aria-hidden="true"></i><strong>Harpa Cristã</strong><span>Encontre hinos e acompanhe as letras.</span></a>
+        <a href="estudos.html"><i class="fa-solid fa-book-open" aria-hidden="true"></i><strong>Estudos Bíblicos</strong><span>Acompanhe a lição em slides.</span></a>
+        <a href="quiz.html"><i class="fa-solid fa-trophy" aria-hidden="true"></i><strong>Quiz Bíblico</strong><span>Jogue sozinho ou em grupo.</span></a>
+      </nav>
+      <div class="tools-actions">
+        <a class="tools-project" href="apresentacao.html"><i class="fa-solid fa-display" aria-hidden="true"></i> Abrir Central Datashow <span aria-hidden="true">→</span></a>
+        <button class="install-app" id="installApp" type="button" hidden><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i> Instalar app</button>
+      </div>
+    </aside>
+    <div class="hero-scroll">▼</div>
+  </section>
+
+  <!-- PALAVRA DO DIA -->
+  <section class="palavra-section" id="palavra">
+    <div class="section-label">✦ Palavra do Dia ✦</div>
+    <div class="palavra-card" id="palavraCard">
+      <div class="palavra-loading"><i class="fas fa-cross fa-spin"></i></div>
+    </div>
+  </section>
+
+  <!-- CULTOS / AVISOS -->
+  <section class="cultos-section" id="cultos">
+    <div class="container">
+      <h2 class="section-title">Programação de Cultos</h2>
+      <p class="section-desc">Venha adorar ao Senhor. Todos são bem-vindos!</p>
+      <div class="cultos-grid" id="cultosGrid"></div>
+      <div class="avisos-box" id="avisosBox">
+        <h3><i class="fas fa-bullhorn"></i> Avisos Importantes</h3>
+        <ul id="avisosList"></ul>
+      </div>
+    </div>
+    
+  </section>
+
+  <!-- IGREJAS / INSTAGRAM -->
+  <section class="igrejas-section" id="igrejas">
+    <div class="container">
+      <h2 class="section-title">Nossas Igrejas</h2>
+      <p class="section-desc">Conheça cada congregação e acompanhe nossas redes sociais</p>
+      <div class="igrejas-grid" id="igrejasGrid"></div>
+    </div>
+  </section>
+
+  <!-- PASTORES -->
+  <section class="pastores-section" id="pastores">
+    <div class="container">
+      <h2 class="section-title">Nossos Pastores</h2>
+      <p class="section-desc">Líderes ungidos a serviço do Reino de Deus</p>
+      <div class="pastores-grid" id="pastoresGrid"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" id="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <span class="footer-cross">✝</span>
+        <span>Assembleia de Deus – ÁGAPE</span>
+      </div>
+      <a href="biblia.html" class="btn-hero">📖 Ler a Bíblia</a>
+      <a href="harpa.html" class="btn-hero"> 🎵 Harpa Cristã </a>
+      <a href="estudos.html" class="btn-hero" style="margin-top:16px">📚 Estudos Bíblicos</a>
+   <a href="quiz.html" class="btn-hero" style="margin-top:16px">
+  🏆 Jogar IEADA Bible Game
+</a>
+      <p class="footer-verse">"Porque Deus amou o mundo de tal maneira que deu o seu Filho unigênito." – João 3:16</p>
+      <p class="footer-copy">© 2026 IEADA. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+  <dialog class="install-help" id="installHelp" aria-labelledby="installTitle">
+    <h2 id="installTitle">Instalar IEADA Ágape</h2>
+    <p><strong>Android</strong><br>No Chrome, abra o menu de três pontos e toque em <b>Instalar e criar atalho</b> ou <b>Adicionar à tela inicial</b>.</p>
+    <p><strong>iPhone</strong><br>No Safari, toque em <b>Compartilhar</b> e <b>Adicionar à Tela de Início</b>. Ative <b>Abrir como App da Web</b> se a opção aparecer e toque em <b>Adicionar</b>.</p>
+    <p><strong>Computador</strong><br>No Chrome ou Edge, procure a opção de instalar o site no menu do navegador.</p>
+    <form method="dialog"><button class="install-app" type="submit">Fechar</button></form>
+  </dialog>
+  <script src="instalar.js" defer></script>
+</body>
+</html>
