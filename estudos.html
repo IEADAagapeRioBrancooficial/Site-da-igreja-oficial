@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Estudo bíblico interativo da Assembleia de Deus Ágape: Lição 3, A Regra Fundamental." />
+  <meta name="theme-color" content="#0f0800" />
+  <title>Estudos Bíblicos – A Regra Fundamental | IEADA Ágape</title>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root{--red:#b71c1c;--red-dark:#650900;--gold:#c9a84c;--gold-lt:#f0c040;--dark:#0f0800;--dark2:#1a1000;--cream:#fdf8ee;--green:#238264;--danger:#ce514b}
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% 0%,#3b0905 0%,#160c05 48%,var(--dark) 100%);color:var(--cream);font-family:'Lato',sans-serif}
+    button,select{font:inherit}
+    .header{position:sticky;top:0;z-index:20;background:rgba(15,8,0,.96);border-bottom:1px solid rgba(201,168,76,.36);backdrop-filter:blur(10px)}
+    .header-inner{max-width:1100px;margin:auto;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+    .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .brand img{width:38px;height:38px;object-fit:contain;filter:drop-shadow(0 0 7px rgba(201,168,76,.4))}
+    .brand-name{font:700 .86rem 'Cinzel',serif;color:var(--gold-lt);line-height:1.4}
+    .brand-name span{display:block;font: .65rem 'Lato',sans-serif;color:rgba(240,192,64,.62);letter-spacing:.1em}
+    .back{padding:7px 13px;border:1px solid rgba(201,168,76,.35);border-radius:24px;color:var(--gold);font:600 .72rem 'Cinzel',serif;text-decoration:none;white-space:nowrap}
+    .back:hover{border-color:var(--gold);background:rgba(201,168,76,.08)}
+    .hero{text-align:center;padding:35px 18px 18px}
+    .hero-kicker{color:var(--gold);font:600 .68rem 'Cinzel',serif;letter-spacing:.19em;text-transform:uppercase}
+    h1,h2,h3,h4{font-family:'Cinzel',serif}
+    .hero h1{margin:8px 0 5px;color:var(--gold-lt);font-size:clamp(1.55rem,4.3vw,2.5rem);line-height:1.2}
+    .hero p{margin:0;color:rgba(253,248,238,.58);font-size:.88rem;letter-spacing:.04em}
+    .layout{max-width:940px;margin:0 auto;padding:0 18px 42px}
+    .topic-nav{display:flex;justify-content:center;gap:7px;overflow-x:auto;padding:12px 2px 14px;scrollbar-width:none}
+    .topic-nav::-webkit-scrollbar{display:none}
+    .topic-btn{flex:0 0 auto;padding:7px 11px;border:1px solid rgba(201,168,76,.2);border-radius:20px;background:rgba(255,255,255,.025);color:rgba(253,248,238,.55);font:600 .65rem 'Cinzel',serif;cursor:pointer;transition:.2s}
+    .topic-btn:hover,.topic-btn[aria-current="true"]{color:var(--gold-lt);border-color:rgba(201,168,76,.6);background:rgba(201,168,76,.1)}
+    .panel{max-width:760px;margin:0 auto;border:1px solid rgba(201,168,76,.32);border-radius:16px;background:linear-gradient(155deg,rgba(127,0,0,.31),rgba(15,8,0,.95) 68%);box-shadow:0 18px 50px rgba(0,0,0,.38);overflow:hidden}
+    .panel-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 20px;background:rgba(0,0,0,.27);border-bottom:1px solid rgba(201,168,76,.18)}
+    .panel-right{display:flex;align-items:center;gap:14px}
+    .present-btn{display:inline-flex;align-items:center;gap:8px;padding:7px 11px;border:1px solid rgba(201,168,76,.34);border-radius:8px;background:rgba(201,168,76,.08);color:var(--gold-lt);font:600 .68rem 'Cinzel',serif;cursor:pointer}
+    .present-btn:hover{background:rgba(201,168,76,.17);border-color:var(--gold)}
+    .section-label{color:var(--gold);font:600 .65rem 'Cinzel',serif;letter-spacing:.14em;text-transform:uppercase}
+    .counter{color:rgba(253,248,238,.45);font: .72rem 'Cinzel',serif;white-space:nowrap}
+    .progress{height:3px;background:rgba(255,255,255,.05)}
+    .progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--red),var(--gold-lt));transition:width .28s ease}
+    .slide-stage{min-height:330px;padding:clamp(22px,5vw,42px);animation:fade-up .3s ease}
+    @keyframes fade-up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+    .slide-title{margin:0 0 19px;color:var(--gold-lt);font-size:clamp(1.15rem,3vw,1.58rem);line-height:1.35}
+    .slide-title::after{content:'';display:block;width:42px;height:2px;margin-top:11px;background:linear-gradient(90deg,var(--gold),transparent)}
+    .slide-content{color:rgba(253,248,238,.88);font-size:1rem;line-height:1.8}
+    .slide-content p{margin:0 0 13px}
+    .slide-content h3{margin:20px 0 8px;color:var(--gold-lt);font-size:.93rem}
+    .slide-content h4{margin:18px 0 7px;color:#f2d286;font-size:.82rem}
+    .slide-content ul,.slide-content ol{padding-left:22px;margin:8px 0 14px}
+    .slide-content li{padding-left:3px;margin:7px 0}
+    .slide-content strong{color:#ffe3a0}
+    .slide-content em{color:#f1d89f}
+    .ref{display:block;margin-top:12px;color:var(--gold);font:600 .72rem 'Cinzel',serif;letter-spacing:.04em}
+    .truth-card{padding:17px 19px;margin:12px 0;border-left:3px solid var(--gold);border-radius:0 11px 11px 0;background:rgba(201,168,76,.08)}
+    .truth-label{display:block;margin-bottom:5px;color:var(--gold);font:600 .65rem 'Cinzel',serif;letter-spacing:.16em;text-transform:uppercase}
+    .truth-text{font:italic 1.07rem/1.7 'Cinzel',serif;color:var(--cream)}
+    .practical-card{padding:15px 18px;border:1px solid rgba(201,168,76,.22);border-radius:10px;background:rgba(201,168,76,.05)}
+    .devotional-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:12px}
+    .devotional-item{padding:10px 12px;border:1px solid rgba(201,168,76,.17);border-radius:9px;background:rgba(255,255,255,.035);font-size:.87rem;line-height:1.5}
+    .devotional-item strong{display:block;color:var(--gold-lt);font:600 .72rem 'Cinzel',serif;margin-bottom:3px}
+    .verse-list{display:grid;gap:9px}
+    .verse{display:grid;grid-template-columns:30px 1fr;gap:9px;align-items:start;padding:10px 12px;border-radius:9px;background:rgba(255,255,255,.035);border:1px solid rgba(201,168,76,.12)}
+    .verse-num{color:var(--gold);font:600 .75rem 'Cinzel',serif}
+    .verse p{margin:0}
+    .quiz-meta{display:flex;justify-content:space-between;gap:12px;margin-bottom:15px;color:rgba(253,248,238,.5);font:600 .68rem 'Cinzel',serif;letter-spacing:.09em;text-transform:uppercase}
+    .quiz-question{margin:0 0 17px;font:600 clamp(1.08rem,3vw,1.35rem)/1.55 'Cinzel',serif;color:var(--cream)}
+    .quiz-options{display:grid;gap:9px}
+    .quiz-option{display:flex;align-items:flex-start;gap:12px;width:100%;padding:12px 14px;text-align:left;border:1px solid rgba(201,168,76,.23);border-radius:10px;background:rgba(255,255,255,.04);color:var(--cream);font-size:.92rem;line-height:1.5;cursor:pointer;transition:.18s}
+    .quiz-option:hover:not(:disabled){background:rgba(201,168,76,.1);border-color:rgba(201,168,76,.65);transform:translateY(-1px)}
+    .option-letter{display:grid;place-items:center;flex:0 0 25px;width:25px;height:25px;border:1px solid rgba(201,168,76,.4);border-radius:50%;color:var(--gold-lt);font:600 .7rem 'Cinzel',serif}
+    .quiz-option.correct{border-color:rgba(35,130,100,.8);background:rgba(35,130,100,.16)}
+    .quiz-option.incorrect{border-color:rgba(206,81,75,.75);background:rgba(206,81,75,.13)}
+    .quiz-option:disabled{cursor:default}
+    .feedback{display:none;margin-top:14px;padding:14px 16px;border:1px solid rgba(201,168,76,.2);border-radius:10px;background:rgba(0,0,0,.2);color:rgba(253,248,238,.82);font-size:.88rem;line-height:1.6}
+    .feedback.show{display:block}
+    .feedback strong{display:block;margin-bottom:4px;color:var(--gold-lt);font-family:'Cinzel',serif}
+    .restart-quiz{display:block;margin-top:11px;padding:7px 11px;border:1px solid rgba(201,168,76,.3);border-radius:7px;background:rgba(255,255,255,.04);color:var(--gold-lt);font:600 .65rem 'Cinzel',serif;cursor:pointer}
+    .restart-quiz:hover{background:rgba(201,168,76,.12);border-color:var(--gold)}
+    .slide-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:760px;margin:13px auto 0}
+    .nav-button{display:flex;align-items:center;gap:8px;min-width:120px;padding:11px 15px;border:1px solid rgba(201,168,76,.31);border-radius:9px;background:rgba(127,0,0,.24);color:var(--gold-lt);font:600 .72rem 'Cinzel',serif;cursor:pointer;transition:.2s}
+    .nav-button:hover:not(:disabled){background:rgba(127,0,0,.5);border-color:var(--gold)}
+    .nav-button:disabled{opacity:.28;cursor:default}
+    .slide-dots{display:flex;justify-content:center;gap:5px;flex-wrap:wrap;margin:13px auto 0;max-width:540px}
+    .slide-dot{width:8px;height:8px;padding:0;border:1px solid rgba(201,168,76,.5);border-radius:50%;background:transparent;cursor:pointer}
+    .slide-dot[aria-current="true"]{background:var(--gold-lt);border-color:var(--gold-lt);box-shadow:0 0 7px rgba(240,192,64,.45)}
+    .footer{text-align:center;padding:21px 15px 28px;color:rgba(253,248,238,.32);font: .68rem 'Cinzel',serif;letter-spacing:.08em}
+    @media(max-width:600px){.header-inner{padding:9px 12px}.brand-name{font-size:.72rem}.brand img{width:32px;height:32px}.back{font-size:.64rem;padding:6px 10px}.hero{padding-top:27px}.layout{padding:0 11px 32px}.topic-nav{justify-content:flex-start}.topic-btn{font-size:.61rem;padding:7px 9px}.panel-top{padding:10px 14px}.slide-stage{min-height:280px;padding:22px 17px}.slide-content{font-size:.95rem;line-height:1.74}.devotional-grid{grid-template-columns:1fr}.slide-nav{gap:8px}.nav-button{min-width:0;padding:10px 11px;font-size:.65rem}.slide-dots{max-width:300px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+  </style>
+  <link rel="stylesheet" href="desktop.css">
+  <link rel="stylesheet" href="estudos-projecao.css">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/app-apple-180.png">
+  <meta name="apple-mobile-web-app-title" content="IEADA Ágape">
+</head>
+<body class="site-study">
+  <header class="header">
+    <div class="header-inner">
+      <a class="brand" href="index.html"><img src="logo.png" alt=""><span class="brand-name">Assembleia de Deus Ágape<span>IEADA · Rio Branco</span></span></a>
+      <a class="back" href="index.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Voltar ao site</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-kicker">Estudos Bíblicos · Lição 3</div>
+    <h1>A Regra Fundamental</h1>
+    <p>Hermenêutica Bíblica · leia no seu ritmo ou apresente no Datashow</p>
+  </section>
+
+  <main class="layout" id="presentation">
+    <nav class="topic-nav" id="topicNav" aria-label="Seções do estudo"></nav>
+    <section class="panel" aria-live="polite">
+      <div class="panel-top"><span class="section-label" id="sectionLabel"></span><div class="panel-right"><span class="counter" id="counter"></span><button class="present-btn" id="studyFullscreen" type="button"><i class="fa-solid fa-expand" aria-hidden="true"></i> Tela cheia</button><button class="present-btn" id="presentButton" type="button" aria-pressed="false" title="Modo Datashow (F)"><i class="fa-solid fa-expand" aria-hidden="true"></i><span>Datashow</span></button></div></div>
+      <div class="progress"><div class="progress-fill" id="progressFill"></div></div>
+      <article class="slide-stage" id="slideStage"></article>
+    </section>
+    <nav class="slide-nav" aria-label="Navegação dos slides">
+      <button class="nav-button" id="previous" type="button"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Anterior</button>
+      <button class="nav-button" id="next" type="button">Próximo <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+    </nav>
+    <div class="slide-dots" id="slideDots" aria-label="Ir para slide"></div>
+  </main>
+
+  <footer class="footer">IEADA · Assembleia de Deus Ágape</footer>
+
+  <div hidden aria-hidden="true">
+    <template id="s1">
+      <div class="truth-card"><span class="truth-label">Texto Áureo</span><div class="truth-text">“Não cessamos de orar por vós e de pedir que transbordeis de pleno conhecimento da sua vontade, em toda a sabedoria e entendimento espiritual.” <span class="ref">Colossenses 1.9</span></div></div>
+      <div class="practical-card"><span class="truth-label">Verdade Prática</span><strong>A Bíblia interpreta a própria Bíblia.</strong></div>
+      <h3>Devocional Diário</h3>
+      <div class="devotional-grid">
+        <div class="devotional-item"><strong>Segunda · Dt 8.3</strong>Alimento para a alma faminta</div>
+        <div class="devotional-item"><strong>Terça · 2Tm 3.16</strong>Palavra inspirada por Deus</div>
+        <div class="devotional-item"><strong>Quarta · Ez 37.7</strong>O poder que concede vida</div>
+        <div class="devotional-item"><strong>Quinta · 2Co 6.7</strong>Armas ofensivas e defensivas</div>
+        <div class="devotional-item"><strong>Sexta · Jr 15.16</strong>Sentir prazer nos Mandamentos</div>
+        <div class="devotional-item"><strong>Sábado · Sl 119.11</strong>Guardar a Palavra no coração</div>
+      </div>
+      <p class="ref">Hinos da Harpa: 408 · 147 · 135</p>
+    </template>
+    <template id="s2">
+      <h3>Colossenses 1.9–12</h3>
+      <div class="verse-list">
+        <div class="verse"><span class="verse-num">9</span><p>Por esta razão, também nós, desde o dia em que o ouvimos, não cessamos de orar por vós e de pedir que transbordeis de pleno conhecimento da sua vontade, em toda a sabedoria e entendimento espiritual;</p></div>
+        <div class="verse"><span class="verse-num">10</span><p>a fim de viverdes de modo digno do Senhor, para o seu inteiro agrado, frutificando em toda boa obra e crescendo no pleno conhecimento de Deus;</p></div>
+        <div class="verse"><span class="verse-num">11</span><p>sendo fortalecidos com todo o poder, segundo a força da sua glória, em toda a perseverança e longanimidade; com alegria,</p></div>
+        <div class="verse"><span class="verse-num">12</span><p>dando graças ao Pai, que vos fez idôneos à parte que vos cabe da herança dos santos na luz.</p></div>
+      </div>
+    </template>
+    <template id="s3">
+      <h3>Introdução</h3>
+      <p>Ao estudar as Escrituras, deve-se levar em conta que não se pode entender o texto sagrado do seu próprio modo, seguindo fórmulas particulares (2Pe 1.20). A hermenêutica é a ciência que trata das regras que visam à interpretação das passagens bíblicas, buscando elucidar o seu real sentido e, assim, possibilitar a sua aplicação correta.</p>
+    </template>
+    <template id="s3b">
+      <div class="truth-card"><span class="truth-label">I. A regra das regras</span><div class="truth-text">“A Bíblia interpreta a Bíblia.”</div></div>
+      <p>Normalmente, quando se trata de interpretar o texto de um documento importante, no qual se encontram pontos obscuros, deve-se esperar primariamente que este seja o seu próprio intérprete. Esgotada essa possibilidade, outras fontes poderão ser buscadas. Em relação à Bíblia, tal procedimento não somente é conveniente e possível, mas também absolutamente necessário e indispensável. Desta, derivam todas as outras regras.</p>
+    </template>
+    <template id="s4">
+      <h3>1. A Bíblia interpreta a Bíblia</h3>
+      <p>De fato, a Bíblia é indiscutivelmente a melhor intérprete de si mesma. Esta é a primeira e fundamental regra da correta interpretação bíblica. A Escritura é, indiscutivelmente, o seu melhor comentário e interpretação.</p>
+      <div class="truth-card"><span class="truth-label">Ideia-chave</span><div class="truth-text">Quando uma passagem parecer difícil, procure outra parte da Bíblia que a esclareça.</div></div>
+      <p class="ref">Atos 8.30–35 · 2 Pedro 1.20</p>
+    </template>
+    <template id="s5">
+      <h3>2. Contexto amplo</h3>
+      <p>Para se interpretar a Bíblia, deve-se enxergar toda ela, a partir do seu contexto imediato, ou seja, partindo de todas as palavras em volta do texto, e depois verificar todas as outras passagens de referência. O intérprete precisa estar familiarizado com a Escritura e manter uma aplicação concentrada.</p>
+    </template>
+    <template id="s5b">
+      <p>Quanto mais familiarizado estiver, mais facilmente encontrará os versículos e passagens correlatas que esclarecem outras passagens, <em>“conferindo coisas espirituais com espirituais”</em> (1Co 2.13). Isso equivale a usar a Bíblia de tal modo que ela venha a ser sua própria intérprete.</p>
+    </template>
+    <template id="s6">
+      <h3>3. Simplicidade e clareza</h3>
+      <p>Sendo a Bíblia um livro divinamente inspirado, seu objetivo principal é fazer o homem <em>“sábio para a salvação pela fé em Cristo Jesus”</em> (2Tm 3.15,16). Por isso, é plausível que a mensagem bíblica tenha sido expressa com simplicidade e clareza, para ser suficientemente entendida.</p>
+      <p>Todavia, como a Bíblia trata, no seu conjunto, de temas que abrangem o céu e a terra, o visível e o invisível, o material e o espiritual, o tempo e a eternidade, há passagens que só podem ser plenamente entendidas mediante um estudo cuidadoso e aplicado.</p>
+      <h3>Quando uma passagem parece difícil</h3>
+      <p>Procure outra parte da Bíblia que a esclareça (At 8.30–35; Is 53.7).</p>
+      <ul><li>A Bíblia é absolutamente consistente e não pode contradizer-se, inclusive em questões de doutrina, moral, ética ou fatos históricos.</li><li>O ensino de passagens claras e múltiplas deve ter prioridade sobre um ensino aparente de passagens únicas e obscuras.</li></ul>
+    </template>
+    <template id="s7">
+      <h3>4. Uma única verdade</h3>
+      <p>Há um significado correto para cada texto da Bíblia, uma única verdade possível, ao contrário da teoria liberal de que a interpretação depende de cada intérprete (Jo 17.17).</p>
+      <p>Na realidade, não existem múltiplas interpretações corretas de uma passagem bíblica, exceto no sentido de que existem, algumas vezes, vários aspectos do significado. Uma passagem pode ter variadas aplicações, mas só existe um único significado central.</p>
+      <p>A correta interpretação levará diferentes pessoas, de diferentes lugares e idades, a chegarem às mesmas conclusões sobre esse significado central, não ao contrário. Jesus enviou o Espírito Santo para nos guiar no entendimento correto da mesma Palavra que Ele inspirou (Jo 14.26; 1Jo 2.27).</p>
+      <p class="ref">“A Bíblia é sua principal intérprete.”</p>
+    </template>
+    <template id="s8">
+      <h3>II. Vantagens desta regra</h3>
+      <p>Sabendo que a Escritura deve ser explicada pela própria Escritura, algumas vantagens decorrem de se usar a Bíblia como intérprete de si mesma.</p>
+    </template>
+    <template id="s8b">
+      <h3>1. Sentido verdadeiro das palavras</h3>
+      <p>Tomando a comparação de preceitos com preceitos, de conceitos com conceitos, verificando atentamente as passagens correlatas expressas na Palavra, não só o intérprete adquire o verdadeiro sentido das palavras e textos determinados, mas também a certeza, quanto à fé e à moral, de todas as doutrinas bíblicas (Lc 24.27).</p>
+    </template>
+    <template id="s9">
+      <h3>2. Totalidade da mensagem</h3>
+      <p>A revelação bíblica foi dada progressivamente, de maneira que algumas passagens apenas refletem um ensino parcial duma verdade (Is 28.10; Hb 1.1).</p>
+    </template>
+    <template id="s9b">
+      <p>Portanto, deve-se ter sempre em mente que não se pode considerar de toda bíblica uma doutrina antes de resumir e encerrar tudo quanto a Escritura diz a respeito da mesma. Tampouco um dever é de todo bíblico se não abrange e reúne todos os ensinos, prescrições e reservas que determinam a Bíblia em relação ao mesmo.</p>
+    </template>
+    <template id="s10">
+      <h3>3. Importância desta regra</h3>
+      <p>É de suma importância observar a regra das regras (a Bíblia é sua própria intérprete), evitando incorrer em erros e até atrair sobre si a maldição que a própria Escritura Sagrada pronuncia contra quem adulterar a Palavra de Deus (2Co 4.2; 2Pe 3.16).</p>
+      <p>Além disso, quem busca interpretar a Bíblia sob a égide dessa regra fundamental terá mais possibilidade de descobrir o verdadeiro significado dos textos sagrados.</p>
+      <p>Quer seja para aplicar a verdade divina na sua própria vida, ou para pregar e ensinar a outros, o intérprete tem o dever de tomar os ensinamentos bíblicos na sua integridade e verdade, com o firme compromisso de jamais torcê-los ou ajustá-los à sua particular percepção ou necessidade.</p>
+      <div class="truth-card"><span class="truth-label">Exemplo da lição</span><p>Ao ser tentado no deserto, Jesus usou esta regra de interpretação da Escritura para refutar cada uma das investidas satânicas (Mt 4.1–11).</p><p><em>“Não se pronuncia sentença antes de haver ouvido as partes.”</em></p></div>
+    </template>
+    <template id="s11">
+      <h3>III. Violações desta regra</h3>
+      <p>Muitos, ao longo da história, ignorando ou violando esta regra simples e racional, têm buscado conferir aos seus funestos erros (heresias) o aparente apoio das Escrituras.</p>
+    </template>
+    <template id="s11b">
+      <h3>1. Erros históricos</h3>
+      <p>Os judeus encontraram aparente apoio nas Escrituras para rejeitarem a Cristo, ao se fixarem em passagens bíblicas isoladas e arrancadas de seu contexto (Jo 1.11; 7.27; 12.34). Eles também rejeitaram o Seu testemunho (Jo 3.32; 5.43).</p>
+    </template>
+    <template id="s12">
+      <h3>Erros históricos · continuação</h3>
+      <p>Procedendo de modo semelhante, os católicos encontram aparente apoio para o erro do papado e da adoração a Maria, entre outras heresias; os espíritas acham apoio para a sua doutrina errônea da encarnação; os céticos, os incrédulos e os zombadores acham base para as contradições do saber (1Tm 6.20).</p>
+      <p>Todas as heresias têm pelo menos dois pontos em comum:</p>
+      <ol type="a"><li>partir do pressuposto errôneo de que se pode provar qualquer coisa com a Bíblia;</li><li>ignorar a regra fundamental (e as demais regras) de interpretação.</li></ol>
+      <p>Porém, o maior erro é desconhecer que <em>“a lei do Senhor é perfeita”</em>, portanto, não tem contradição nem falsidade (Sl 19.7).</p>
+    </template>
+    <template id="s13">
+      <h3>2. Juízos eternos</h3>
+      <p>Se tão somente esses intérpretes tivessem tido o bom senso de permitir à Bíblia a condição de explicar-se a si mesma, teriam evitado os tão funestos erros resultantes de sua obediência a espíritos enganadores e a ensinamentos de demônios (1Tm 4.1).</p>
+      <p>Tais pessoas estão sujeitas a juízo, pois estão em franca desobediência ao Espírito Santo, o Inspirador das Escrituras. Os mesmos foram enganados por Satanás, o primeiro intérprete conhecido da Palavra de Deus, o qual deu um sentido que ela não tinha, falseando astutamente a verdade (Gn 3.1–6; Ap 22.18). Cuidado!</p>
+      <div class="truth-card"><span class="truth-label">Quadro da lição</span><div class="truth-text">“O primeiro intérprete da Bíblia foi Satanás. Falsificando astutamente a verdade.”</div></div>
+    </template>
+    <template id="s14">
+      <h3>Aplicação pessoal</h3>
+      <div class="truth-card"><span class="truth-label">A regra em prática</span><div class="truth-text">A utilização apropriada da regra fundamental — “A Bíblia interpreta a Bíblia” — levará ao descobrimento do verdadeiro significado do texto sagrado.</div></div>
+      <p>Leia a passagem no contexto, compare as referências relacionadas e observe o que a própria Escritura diz sobre o tema antes de definir a aplicação.</p>
+    </template>
+    <template id="s17">
+      <h3>Vocabulário</h3>
+      <ul><li><strong>Fundamental:</strong> que serve de fundamento. Básico, essencial, necessário.</li><li><strong>Heresia:</strong> doutrina contrária ao que a Bíblia estatui em matéria de fé.</li><li><strong>Intérprete:</strong> pessoa que interpreta. Comentarista, exegeta, hermeneuta.</li><li><strong>Violação:</strong> ato ou efeito de violar. Infração de normas ou disposições legais.</li></ul>
+    </template>
+    <template id="s18">
+      <h3>Ferramentas à sua disposição</h3>
+      <ul><li>Revistas da Escola Dominical — Aluno e Professor.</li><li>Aplicativo da Revista para Tablets e Smartphones.</li><li>Livro de Consulta e leitura complementar — Instituto Cristão Internacional.</li><li>Videoaulas em DVD — todas as lições apresentadas pelo comentarista.</li><li>Programa de TV — Rede Boas Novas, sábado, às 21h30.</li><li>Site com Sistema de Controle de frequência, igrejas, professores e alunos.</li><li>Certificado e Diploma reconhecidos por seminários e faculdades.</li></ul>
+    </template>
+    <template id="s18b">
+      <p><strong>Central de Atendimento:</strong> (91) 3110-2400<br><strong>Acesse:</strong> www.educacaocristacontinuada.com.br</p>
+    </template>
+    <template id="s19">
+      <p><strong>Estudada em:</strong> ____ / ____ / ______</p>
+      <div class="truth-card"><span class="truth-label">Texto Áureo · Colossenses 1.9</span><div class="truth-text">“Não cessamos de orar por vós e de pedir que transbordeis de pleno conhecimento da sua vontade, em toda a sabedoria e entendimento espiritual.”</div></div>
+      <div class="practical-card"><span class="truth-label">Verdade Prática</span><strong>A Bíblia interpreta a própria Bíblia.</strong></div>
+    </template>
+    <template id="s20">
+      <h3>Devocional Diário</h3>
+      <div class="devotional-grid">
+        <div class="devotional-item"><strong>Segunda · Dt 8.3</strong>Alimento para a alma faminta</div>
+        <div class="devotional-item"><strong>Terça · 2Tm 3.16</strong>Palavra inspirada por Deus</div>
+        <div class="devotional-item"><strong>Quarta · Ez 37.7</strong>O poder que concede vida</div>
+        <div class="devotional-item"><strong>Quinta · 2Co 6.7</strong>Armas ofensivas e defensivas</div>
+        <div class="devotional-item"><strong>Sexta · Jr 15.16</strong>Sentir prazer nos Mandamentos</div>
+        <div class="devotional-item"><strong>Sábado · Sl 119.11</strong>Guardar a Palavra no coração</div>
+      </div>
+      <p class="ref">Hinos da Harpa: 408 · 147 · 135</p>
+    </template>
+    <template id="s21">
+      <h3>Colossenses 1.9–10</h3>
+      <div class="verse-list">
+        <div class="verse"><span class="verse-num">9</span><p>Por esta razão, também nós, desde o dia em que o ouvimos, não cessamos de orar por vós e de pedir que transbordeis de pleno conhecimento da sua vontade, em toda a sabedoria e entendimento espiritual;</p></div>
+        <div class="verse"><span class="verse-num">10</span><p>a fim de viverdes de modo digno do Senhor, para o seu inteiro agrado, frutificando em toda boa obra e crescendo no pleno conhecimento de Deus;</p></div>
+      </div>
+    </template>
+    <template id="s22">
+      <h3>Colossenses 1.11–12</h3>
+      <div class="verse-list">
+        <div class="verse"><span class="verse-num">11</span><p>sendo fortalecidos com todo o poder, segundo a força da sua glória, em toda a perseverança e longanimidade; com alegria,</p></div>
+        <div class="verse"><span class="verse-num">12</span><p>dando graças ao Pai, que vos fez idôneos à parte que vos cabe da herança dos santos na luz.</p></div>
+      </div>
+    </template>
+    <template id="s23">
+      <h3>3. Simplicidade e clareza</h3>
+      <p>Sendo a Bíblia um livro divinamente inspirado, seu objetivo principal é fazer o homem <em>“sábio para a salvação pela fé em Cristo Jesus”</em> (2Tm 3.15,16).</p>
+      <p>Por isso, é plausível que a mensagem bíblica tenha sido expressa com simplicidade e clareza, para ser suficientemente entendida.</p>
+    </template>
+    <template id="s24">
+      <h3>Quando uma passagem parece difícil</h3>
+      <p>Todavia, como a Bíblia trata, no seu conjunto, de temas que abrangem o céu e a terra, o visível e o invisível, o material e o espiritual, o tempo e a eternidade, há passagens que só podem ser plenamente entendidas mediante um estudo cuidadoso e aplicado.</p>
+      <p>Quando uma passagem da Bíblia parece difícil, deve-se procurar alguma outra parte da mesma que a esclareça (At 8.30–35; Is 53.7). Deve-se levar em conta o seguinte:</p>
+    </template>
+    <template id="s24b">
+      <ol type="a"><li>A Bíblia é absolutamente consistente e não pode contradizer-se, inclusive em questões de doutrina, moral, ética ou fatos históricos.</li><li>O ensino de passagens claras e múltiplas deve ter prioridade sobre um ensino aparente de passagens únicas e obscuras.</li></ol>
+    </template>
+    <template id="s25">
+      <h3>4. Uma única verdade</h3>
+      <p>Há um significado correto para cada texto da Bíblia, uma única verdade possível, ao contrário da teoria liberal de que a interpretação depende de cada intérprete (Jo 17.17).</p>
+      <p>Na realidade, não existem múltiplas interpretações corretas de uma passagem bíblica, exceto no sentido de que existem, algumas vezes, vários aspectos do significado.</p>
+    </template>
+    <template id="s26">
+      <h3>Uma verdade central</h3>
+      <p>Uma passagem pode ter variadas aplicações, mas só existe um único significado central. A correta interpretação levará diferentes pessoas, de diferentes lugares e idades, a chegarem às mesmas conclusões sobre esse significado central, não ao contrário.</p>
+      <p>Jesus enviou o Espírito Santo para nos guiar no entendimento correto da mesma Palavra que Ele inspirou (Jo 14.26; 1Jo 2.27).</p>
+      <p class="ref">“A Bíblia é sua principal intérprete.”</p>
+    </template>
+    <template id="s28">
+      <h3>3. Importância desta regra</h3>
+      <p>É de suma importância observar a regra das regras (a Bíblia é sua própria intérprete), evitando incorrer em erros e até atrair sobre si a maldição que a própria Escritura Sagrada pronuncia contra quem adulterar a Palavra de Deus (2Co 4.2; 2Pe 3.16).</p>
+      <p>Além disso, quem busca interpretar a Bíblia sob a égide dessa regra fundamental terá mais possibilidade de descobrir o verdadeiro significado dos textos sagrados.</p>
+    </template>
+    <template id="s29">
+      <h3>Fidelidade ao texto</h3>
+      <p>Quer seja para aplicar a verdade divina na sua própria vida, ou para pregar e ensinar a outros, o intérprete tem o dever de tomar os ensinamentos bíblicos na sua integridade e verdade, com o firme compromisso de jamais torcê-los ou ajustá-los à sua particular percepção ou necessidade.</p>
+    </template>
+    <template id="s29b">
+      <div class="truth-card"><span class="truth-label">Exemplo da lição</span><p>Ao ser tentado no deserto, Jesus usou esta regra de interpretação da Escritura para refutar cada uma das investidas satânicas (Mt 4.1–11).</p><p><em>“Não se pronuncia sentença antes de haver ouvido as partes.”</em></p></div>
+    </template>
+    <template id="s30">
+      <h3>Erros históricos · continuação</h3>
+      <p>Procedendo de modo semelhante, os católicos encontram aparente apoio para o erro do papado e da adoração a Maria, entre outras heresias; os espíritas acham apoio para a sua doutrina errônea da encarnação; os céticos, os incrédulos e os zombadores acham base para as contradições do saber (1Tm 6.20).</p>
+    </template>
+    <template id="s31">
+      <h3>Dois pontos em comum</h3>
+      <p>Todas as heresias têm pelo menos dois pontos em comum:</p>
+      <ol type="a"><li>partir do pressuposto errôneo de que se pode provar qualquer coisa com a Bíblia;</li><li>ignorar a regra fundamental (e as demais regras) de interpretação.</li></ol>
+      <p>Porém, o maior erro é desconhecer que <em>“a lei do Senhor é perfeita”</em>, portanto, não tem contradição nem falsidade (Sl 19.7).</p>
+    </template>
+    <template id="s32">
+      <h3>2. Juízos eternos</h3>
+      <p>Se tão somente esses intérpretes tivessem tido o bom senso de permitir à Bíblia a condição de explicar-se a si mesma, teriam evitado os tão funestos erros resultantes de sua obediência a espíritos enganadores e a ensinamentos de demônios (1Tm 4.1).</p>
+    </template>
+    <template id="s33">
+      <h3>O primeiro intérprete</h3>
+      <p>Tais pessoas estão sujeitas a juízo, pois estão em franca desobediência ao Espírito Santo, o Inspirador das Escrituras. Os mesmos foram enganados por Satanás, o primeiro intérprete conhecido da Palavra de Deus, o qual deu um sentido que ela não tinha, falseando astutamente a verdade (Gn 3.1–6; Ap 22.18). Cuidado!</p>
+    </template>
+    <template id="s33b">
+      <div class="truth-card"><span class="truth-label">Quadro da lição</span><div class="truth-text">“O primeiro intérprete da Bíblia foi Satanás. Falsificando astutamente a verdade.”</div></div>
+    </template>
+    <template id="s34">
+      <h3>Aplicação pessoal</h3>
+      <div class="truth-card"><span class="truth-label">A regra em prática</span><div class="truth-text">A utilização apropriada da regra fundamental — “A Bíblia interpreta a Bíblia” — levará ao descobrimento do verdadeiro significado do texto sagrado.</div></div>
+    </template>
+  </div>
+
+  <script>
+    const slides = [
+      {title:'Lição 3 · A Regra Fundamental',section:'Apresentação',template:'s19'},
+      {title:'Devocional Diário',section:'Apresentação',template:'s20'},
+      {title:'Leitura Bíblica · Colossenses 1.9–10',section:'Apresentação',template:'s21'},
+      {title:'Leitura Bíblica · Colossenses 1.11–12',section:'Apresentação',template:'s22'},
+      {title:'Introdução',section:'Regras',template:'s3'},
+      {title:'A regra das regras',section:'Regras',template:'s3b'},
+      {title:'A Bíblia interpreta a Bíblia',section:'Regras',template:'s4'},
+      {title:'Contexto amplo',section:'Regras',template:'s5'},
+      {title:'Passagens correlatas',section:'Regras',template:'s5b'},
+      {title:'Simplicidade e clareza',section:'Regras',template:'s23'},
+      {title:'Como interpretar passagens difíceis',section:'Regras',template:'s24'},
+      {title:'Dois critérios de interpretação',section:'Regras',template:'s24b'},
+      {title:'Uma única verdade',section:'Regras',template:'s25'},
+      {title:'Uma verdade central',section:'Regras',template:'s26'},
+      {title:'Vantagens desta regra',section:'Vantagens',template:'s8'},
+      {title:'Sentido verdadeiro das palavras',section:'Vantagens',template:'s8b'},
+      {title:'Totalidade da mensagem',section:'Vantagens',template:'s9'},
+      {title:'A doutrina e o conjunto das Escrituras',section:'Vantagens',template:'s9b'},
+      {title:'Importância desta regra',section:'Vantagens',template:'s28'},
+      {title:'Fidelidade ao texto',section:'Vantagens',template:'s29'},
+      {title:'O exemplo de Jesus',section:'Vantagens',template:'s29b'},
+      {title:'Violações desta regra',section:'Violações',template:'s11'},
+      {title:'Erros históricos',section:'Violações',template:'s11b'},
+      {title:'Erros históricos · continuação',section:'Violações',template:'s30'},
+      {title:'Dois pontos em comum',section:'Violações',template:'s31'},
+      {title:'Juízos eternos',section:'Violações',template:'s32'},
+      {title:'O primeiro intérprete',section:'Violações',template:'s33'},
+      {title:'Quadro da lição',section:'Violações',template:'s33b'},
+      {title:'Aplicação pessoal',section:'Aplicação',template:'s34'},
+      {title:'Pergunta 1 · Regra fundamental',section:'Perguntas',quizIndex:0},
+      {title:'Pergunta 2 · Interpretação',section:'Perguntas',quizIndex:1},
+      {title:'Vocabulário',section:'Material de apoio',template:'s17'},
+      {title:'Ferramentas à sua disposição',section:'Material de apoio',template:'s18'},
+      {title:'Central de atendimento',section:'Material de apoio',template:'s18b'}
+    ];
+    const quizQuestions = [
+      {question:'Qual é a regra fundamental da hermenêutica?',options:['A Bíblia interpreta a Bíblia.','Cada pessoa define o sentido que preferir.','Uma passagem deve ser lida isoladamente.','Fontes externas têm prioridade sobre o texto.'],answer:0,explanation:'A regra apresentada na lição é “A Bíblia interpreta a Bíblia”. Dela derivam as outras regras de interpretação.'},
+      {question:'Quem foi o primeiro intérprete que deturpou a Palavra de Deus?',options:['Moisés, ao receber a Lei.','Satanás, ao distorcer a ordem de Deus.','Pedro, ao negar Jesus.','Paulo, ao interpretar os profetas.'],answer:1,explanation:'A lição relaciona essa resposta a Gênesis 3.1–6, quando a serpente dá outro sentido à ordem de Deus.'}
+    ];
+    let current = 0;
+    const quizAnswers = [null,null];
+    const stage = document.getElementById('slideStage');
+    const sectionLabel = document.getElementById('sectionLabel');
+    const counter = document.getElementById('counter');
+    const progressFill = document.getElementById('progressFill');
+    const previous = document.getElementById('previous');
+    const next = document.getElementById('next');
+    const dotWrap = document.getElementById('slideDots');
+    const topicNav = document.getElementById('topicNav');
+    const presentation = document.getElementById('presentation');
+    const presentButton = document.getElementById('presentButton');
+    const letters = ['A','B','C','D'];
+
+    function isPresenting() {
+      return document.fullscreenElement === presentation || presentation.classList.contains('presentation-mode');
+    }
+
+    function fitSlide() {
+      if(!isPresenting()) return;
+      const frame = stage.querySelector('.slide-frame');
+      if(!frame || !stage.clientHeight) return;
+      const padding = getComputedStyle(stage);
+      const available = stage.clientHeight - parseFloat(padding.paddingTop) - parseFloat(padding.paddingBottom);
+      const minimum = stage.clientWidth >= 900 ? 24 : 16;
+      let lower = minimum;
+      let upper = Math.floor(Math.min(frame.clientWidth / 23, available / 6, 66));
+      let size = minimum;
+      while(lower <= upper) {
+        const candidate = Math.floor((lower + upper) / 2);
+        frame.style.setProperty('--slide-size', candidate + 'px');
+        if(frame.offsetHeight <= available) {
+          size = candidate;
+          lower = candidate + 1;
+        } else {
+          upper = candidate - 1;
+        }
+      }
+      frame.style.setProperty('--slide-size', size + 'px');
+    }
+
+    function syncPresentationButton() {
+      const active = isPresenting();
+      presentButton.setAttribute('aria-pressed', String(active));
+      presentButton.title = active ? 'Sair do modo Datashow (F ou Esc)' : 'Modo Datashow (F)';
+      presentButton.innerHTML = active
+        ? '<i class="fa-solid fa-compress" aria-hidden="true"></i><span>Sair do Datashow</span>'
+        : '<i class="fa-solid fa-expand" aria-hidden="true"></i><span>Datashow</span>';
+      fitSlide();
+    }
+
+    async function openFullscreen() {
+      if(!document.fullscreenEnabled || !presentation.requestFullscreen) return;
+      try { await presentation.requestFullscreen(); }
+      catch { /* O modo em janela já está ativo. */ }
+    }
+
+    async function togglePresentation() {
+      if(isPresenting()) {
+        presentation.classList.remove('presentation-mode');
+        if(document.fullscreenElement === presentation) await document.exitFullscreen();
+      } else {
+        presentation.classList.add('presentation-mode');
+        syncPresentationButton();
+        await openFullscreen();
+      }
+      syncPresentationButton();
+    }
+
+    function renderQuiz(slide, questionNumber) {
+      const q = quizQuestions[questionNumber];
+      const selected = quizAnswers[questionNumber];
+      const answered = selected !== null;
+      const right = selected === q.answer;
+      let options = '';
+      q.options.forEach((option,index) => {
+        const state = answered && index === q.answer ? ' correct' : (answered && index === selected ? ' incorrect' : '');
+        options += '<button type="button" class="quiz-option' + state + '" data-option="' + index + '" ' + (answered ? 'disabled' : '') + '><span class="option-letter">' + letters[index] + '</span><span>' + option + '</span></button>';
+      });
+      const feedback = answered
+        ? '<div class="feedback show" role="status"><strong>' + (right ? 'Muito bem!' : 'Vamos rever essa ideia.') + '</strong>' + (right ? '' : 'Resposta correta: ' + q.options[q.answer] + ' ') + q.explanation + (questionNumber === 1 ? '<button class="restart-quiz" type="button">Refazer as perguntas</button>' : '') + '</div>'
+        : '';
+      return '<div class="quiz-meta"><span>Quiz de revisão</span><span>Pergunta ' + (questionNumber + 1) + ' de ' + quizQuestions.length + (answered ? ' · Pontos ' + quizAnswers.filter((a,i) => a === quizQuestions[i].answer).length + '/2' : '') + '</span></div><h3 class="quiz-question">' + q.question + '</h3><div class="quiz-options">' + options + '</div>' + feedback;
+    }
+
+    function render() {
+      const slide = slides[current];
+      sectionLabel.textContent = slide.section;
+      counter.textContent = 'Tela ' + (current + 1) + ' de ' + slides.length;
+      progressFill.style.width = ((current + 1) / slides.length * 100) + '%';
+      previous.disabled = current === 0;
+      next.disabled = current === slides.length - 1 || (slide.quizIndex !== undefined && quizAnswers[slide.quizIndex] === null);
+      next.innerHTML = current === slides.length - 1
+        ? 'Fim do estudo <i class="fa-solid fa-check" aria-hidden="true"></i>'
+        : slide.quizIndex !== undefined && quizAnswers[slide.quizIndex] === null
+          ? 'Responda para continuar'
+          : 'Próximo <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>';
+      stage.innerHTML = '<div class="slide-frame"><h2 class="slide-title">' + slide.title + '</h2><div class="slide-content">' + (slide.template ? document.getElementById(slide.template).innerHTML : renderQuiz(slide,slide.quizIndex)) + '</div></div>';
+      const subtitle = stage.querySelector('.slide-content > h3:first-child');
+      if(subtitle && subtitle.textContent.replace(/^\d+\.\s*/, '') === slide.title) subtitle.hidden = true;
+      fitSlide();
+      stage.classList.remove('reveal');
+      stage.scrollTop = 0;
+      requestAnimationFrame(() => stage.classList.add('reveal'));
+      stage.querySelectorAll('.quiz-option').forEach(button => button.addEventListener('click', () => {
+        quizAnswers[slide.quizIndex] = Number(button.dataset.option);
+        render();
+      }));
+      const restart = stage.querySelector('.restart-quiz');
+      if(restart) restart.addEventListener('click',() => { quizAnswers.fill(null); current = slides.findIndex(item => item.quizIndex === 0); render(); });
+      dotWrap.querySelectorAll('button').forEach((button,index) => button.setAttribute('aria-current',String(index === current)));
+      topicNav.querySelectorAll('button').forEach(button => button.setAttribute('aria-current',String(button.dataset.section === slide.section)));
+      topicNav.querySelectorAll('button').forEach(button => button.setAttribute('aria-label',button.dataset.section + (button.dataset.section === slide.section ? ' · seção atual' : '')));
+    }
+
+    const sections = [];
+    slides.forEach((slide,index) => { if(!sections.includes(slide.section)) sections.push(slide.section); });
+    sections.forEach(section => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'topic-btn';
+      button.textContent = section;
+      button.dataset.section = section;
+      button.addEventListener('click',() => { current = slides.findIndex(slide => slide.section === section); render(); window.scrollTo({top:0,behavior:'smooth'}); });
+      topicNav.appendChild(button);
+    });
+    slides.forEach((slide,index) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'slide-dot';
+      button.title = (index + 1) + '. ' + slide.title;
+      button.setAttribute('aria-label','Ir para tela ' + (index + 1) + ': ' + slide.title);
+      button.setAttribute('aria-current','false');
+      button.addEventListener('click',() => { current = index; render(); window.scrollTo({top:0,behavior:'smooth'}); });
+      dotWrap.appendChild(button);
+    });
+    previous.addEventListener('click',() => { if(current > 0){ current--; render(); window.scrollTo({top:0,behavior:'smooth'}); } });
+    next.addEventListener('click',() => { if(current < slides.length - 1 && !next.disabled){ current++; render(); window.scrollTo({top:0,behavior:'smooth'}); } });
+    presentButton.addEventListener('click',togglePresentation);
+    document.getElementById('studyFullscreen').addEventListener('click', openFullscreen);
+    let wasFullscreen = false;
+    document.addEventListener('fullscreenchange', () => {
+      const fullscreen = document.fullscreenElement === presentation;
+      if(wasFullscreen && !fullscreen) presentation.classList.remove('presentation-mode');
+      wasFullscreen = fullscreen;
+      syncPresentationButton();
+    });
+    new ResizeObserver(fitSlide).observe(stage);
+    document.fonts?.ready.then(fitSlide);
+    document.addEventListener('keydown',event => {
+      if(event.altKey || event.ctrlKey || event.metaKey) return;
+      if(event.key === 'Escape' && document.fullscreenElement !== presentation && presentation.classList.contains('presentation-mode')){
+        togglePresentation();
+        return;
+      }
+      if(event.key.toLowerCase() === 'f'){ event.preventDefault(); togglePresentation(); return; }
+      if(event.key === 'ArrowRight' && !next.disabled && current < slides.length - 1){ current++; render(); }
+      if(event.key === 'ArrowLeft' && current > 0){ current--; render(); }
+    });
+    if(new URLSearchParams(location.search).get('datashow') === '1') {
+      presentation.classList.add('presentation-mode');
+    }
+    if(!document.fullscreenEnabled) document.getElementById('studyFullscreen').style.display = 'none';
+    render();
+    syncPresentationButton();
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,109 @@
+/* Leitura para projetor. O tamanho base é ajustado ao conteúdo de cada tela. */
+#studyFullscreen { display: none; }
+.panel-right { flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+.slide-content { overflow-wrap: anywhere; }
+#presentation button:focus-visible { outline: 2px solid #ffdb80; outline-offset: 3px; }
+
+body:has(#presentation.presentation-mode) { overflow: hidden; }
+body:has(#presentation.presentation-mode) > :is(.header, .hero, .footer) { visibility: hidden; }
+
+#presentation:is(:fullscreen, .presentation-mode) {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  margin: 0;
+  padding: clamp(8px, 1.5vh, 20px) clamp(12px, 3vw, 50px);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #100a07;
+}
+
+#presentation:is(:fullscreen, .presentation-mode) :is(.topic-nav, .slide-dots) { display: none; }
+#presentation.presentation-mode:not(:fullscreen) #studyFullscreen { display: inline-flex; }
+#presentation:is(:fullscreen, .presentation-mode) .panel {
+  width: 100%;
+  max-width: none;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: radial-gradient(ellipse at 10% 0%, #2b1510, #170d09 80%);
+}
+#presentation:is(:fullscreen, .presentation-mode) .panel-top { padding: 6px clamp(10px, 2vw, 26px); }
+#presentation:is(:fullscreen, .presentation-mode) .panel-top :is(.section-label, .counter) {
+  font-family: Lato, system-ui, sans-serif;
+  font-size: clamp(.75rem, 1.25vw, 1.05rem);
+  color: #ffdb95;
+}
+
+#presentation:is(:fullscreen, .presentation-mode) .slide-stage {
+  --slide-size: clamp(18px, 3.4vw, 56px);
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  padding: clamp(10px, 2.6vh, 36px) clamp(14px, 3.5vw, 64px);
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: safe center;
+  animation: none;
+}
+
+#presentation:is(:fullscreen, .presentation-mode) .slide-frame {
+  width: 100%;
+  max-width: 1750px;
+  flex: 0 0 auto;
+  margin-inline: auto;
+  font: 700 var(--slide-size)/1.3 Lato, system-ui, sans-serif;
+  overflow-wrap: anywhere;
+}
+
+#presentation:is(:fullscreen, .presentation-mode) .slide-title {
+  margin: 0 0 .42em;
+  font: 700 1.24em/1.12 Lato, system-ui, sans-serif;
+  color: #ffdc89;
+}
+#presentation:is(:fullscreen, .presentation-mode) .slide-title::after { margin-top: .25em; width: 1.6em; }
+#presentation:is(:fullscreen, .presentation-mode) .slide-content { font-size: 1em; line-height: inherit; color: #fff9ef; }
+#presentation:is(:fullscreen, .presentation-mode) .slide-content :is(p, ul, ol) { margin: 0 0 .38em; }
+#presentation:is(:fullscreen, .presentation-mode) .slide-content :is(ul, ol) { padding-inline-start: 1.3em; }
+#presentation:is(:fullscreen, .presentation-mode) .slide-content li { margin-block: .16em; }
+#presentation:is(:fullscreen, .presentation-mode) .slide-content > :last-child { margin-bottom: 0; }
+#presentation:is(:fullscreen, .presentation-mode) .slide-content :is(h3, h4) {
+  margin: 0 0 .3em;
+  font: 700 .86em/1.2 Lato, system-ui, sans-serif;
+  color: #ffd98e;
+}
+#presentation:is(:fullscreen, .presentation-mode) :is(.truth-card, .practical-card, .verse, .devotional-item) {
+  padding: .35em .55em;
+  margin: 0 0 .3em;
+}
+#presentation:is(:fullscreen, .presentation-mode) :is(.truth-label, .ref, .verse-num, .devotional-item strong) {
+  font: 700 .65em/1.3 Lato, system-ui, sans-serif;
+  color: #ffdb95;
+  letter-spacing: .02em;
+}
+#presentation:is(:fullscreen, .presentation-mode) :is(.truth-text, .verse p) { font: inherit; margin: 0; }
+#presentation:is(:fullscreen, .presentation-mode) .verse { grid-template-columns: 1em minmax(0, 1fr); gap: .35em; }
+#presentation:is(:fullscreen, .presentation-mode) .devotional-grid { margin: 0 0 .35em; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+#presentation:is(:fullscreen, .presentation-mode) .devotional-item { font-size: .82em; line-height: 1.23; }
+#presentation:is(:fullscreen, .presentation-mode) .devotional-item strong { font-size: .85em; }
+#presentation:is(:fullscreen, .presentation-mode) .quiz-meta { font: 700 .62em/1.25 Lato, system-ui, sans-serif; color: #ffdb95; margin-bottom: .5em; }
+#presentation:is(:fullscreen, .presentation-mode) .quiz-question { font-size: 1em; }
+#presentation:is(:fullscreen, .presentation-mode) .quiz-options { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .25em; }
+#presentation:is(:fullscreen, .presentation-mode) .quiz-option { font: inherit; font-size: .82em; padding: .34em .5em; gap: .35em; }
+#presentation:is(:fullscreen, .presentation-mode) .option-letter { width: 1.4em; height: 1.4em; flex-basis: 1.4em; font-size: .8em; }
+#presentation:is(:fullscreen, .presentation-mode) .feedback { font: inherit; font-size: .75em; margin-top: .38em; padding: .35em .55em; }
+#presentation:is(:fullscreen, .presentation-mode) .restart-quiz { font: inherit; font-size: .8em; margin-top: .25em; }
+#presentation:is(:fullscreen, .presentation-mode) .slide-nav { width: 100%; max-width: none; margin: 0; }
+#presentation:is(:fullscreen, .presentation-mode) .nav-button { min-width: 0; padding: 7px 14px; font: 700 clamp(.8rem, 1.35vw, 1.1rem)/1.25 Lato, system-ui, sans-serif; }
+
+@media (max-width: 600px) {
+  .panel-top { flex-wrap: wrap; }
+  #presentation:is(:fullscreen, .presentation-mode) .devotional-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #presentation:is(:fullscreen, .presentation-mode) .quiz-options { grid-template-columns: 1fr; }
+}

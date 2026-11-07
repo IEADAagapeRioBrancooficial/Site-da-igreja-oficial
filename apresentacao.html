@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#180e0b">
+  <title>Central Datashow | IEADA Ágape</title>
+  <meta name="description" content="Abra a Bíblia, a Harpa Cristã, os estudos e o quiz da IEADA Ágape para apresentar no Datashow.">
+  <link rel="icon" href="logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    :root { color-scheme: dark; --gold: #f2cf7e; --cream: #fdf8ee; --muted: #e4cfc2; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(ellipse at 18% 0%, #431016, #1d100c 50%, #100907);
+      color: var(--cream);
+      font: 1rem/1.55 Lato, system-ui, sans-serif;
+    }
+    a { color: inherit; }
+    a:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
+    .frame { width: min(100% - 40px, 1220px); margin-inline: auto; }
+    .masthead {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px 20px;
+      padding: 18px 0;
+      border-bottom: 1px solid #f2cf7e46;
+    }
+    .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--gold); text-decoration: none; font-weight: 700; }
+    .brand img { width: 40px; height: 40px; object-fit: contain; }
+    .back { color: var(--muted); text-underline-offset: 4px; }
+    main { padding-block: clamp(32px, 6vh, 68px) 48px; }
+    .eyebrow { color: var(--gold); letter-spacing: .16em; text-transform: uppercase; font-weight: 700; font-size: .76rem; }
+    h1 { margin: 6px 0 12px; color: var(--gold); font: 700 clamp(2.05rem, 5.2vw, 4.5rem)/1.1 Cinzel, Georgia, serif; }
+    .intro { max-width: 58ch; margin: 0 0 clamp(24px, 4vh, 42px); color: var(--muted); font-size: clamp(1rem, 1.7vw, 1.22rem); }
+    .tools { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(12px, 2vw, 20px); }
+    .tool {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: clamp(10px, 2vw, 20px);
+      min-height: 112px;
+      padding: clamp(14px, 2.3vw, 28px);
+      border: 1px solid #d6a85a66;
+      border-radius: 14px;
+      background: #271713;
+      text-decoration: none;
+      transition: background .18s, border-color .18s;
+    }
+    .tool:hover { background: #39221a; border-color: var(--gold); }
+    .tool-icon { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 12px; background: #f2cf7e18; color: var(--gold); }
+    .tool-icon svg { width: 25px; height: 25px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+    .tool strong { display: block; font: 700 clamp(1.05rem, 2vw, 1.55rem)/1.25 Cinzel, Georgia, serif; }
+    .tool small { display: block; margin-top: 5px; color: var(--muted); font-size: .95rem; }
+    .arrow { color: var(--gold); font-size: 1.4rem; }
+    .shortcuts {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px 24px;
+      padding: 18px 0;
+      margin-top: 22px;
+      border-top: 1px solid #f2cf7e46;
+      color: var(--muted);
+      font-size: .94rem;
+    }
+    kbd { display: inline-block; padding: 1px 7px; border: 1px solid #d6a85a80; border-radius: 5px; color: var(--gold); }
+    @media (max-width: 720px) { .tools { grid-template-columns: 1fr; } .tool { min-height: 88px; } }
+    @media (prefers-reduced-motion: reduce) { .tool { transition: none; } }
+  </style>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/app-apple-180.png">
+  <meta name="apple-mobile-web-app-title" content="IEADA Ágape">
+</head>
+<body>
+  <header class="masthead frame">
+    <a class="brand" href="index.html"><img src="logo.png" alt=""> IEADA Ágape · Rio Branco</a>
+    <a class="back" href="index.html">← Voltar ao site</a>
+  </header>
+  <main class="frame">
+    <div class="eyebrow">Recursos para cultos e estudos</div>
+    <h1>Central Datashow</h1>
+    <p class="intro">Escolha o que vai apresentar. Abra o conteúdo e clique em <strong>Datashow</strong> para projetar em tela cheia.</p>
+    <nav class="tools" aria-label="Ferramentas para apresentar">
+      <a class="tool" href="biblia.html">
+        <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6v14M3 4h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5v13h-5a4 4 0 0 0-4 3 4 4 0 0 0-4-3H3z"/></svg></span>
+        <span><strong>Bíblia Sagrada</strong><small>Escolha o livro e o capítulo.</small></span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="tool" href="harpa.html">
+        <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-2v13M9 8l11-2"/><ellipse cx="6" cy="18" rx="3" ry="2.5"/><ellipse cx="17" cy="16" rx="3" ry="2.5"/></svg></span>
+        <span><strong>Harpa Cristã</strong><small>Busque um hino por número ou nome.</small></span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="tool" href="estudos.html?datashow=1">
+        <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12a2 2 0 0 1 2 2v14H7a3 3 0 0 1-3-3V5a2 2 0 0 1 2-2zM4 16a3 3 0 0 1 3-3h13M8 7h8M8 10h5"/></svg></span>
+        <span><strong>Estudos Bíblicos</strong><small>Abra a lição pronta para projetar.</small></span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="tool" href="quiz.html">
+        <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3h8v7a4 4 0 1 1-8 0zM8 5H4v2a4 4 0 0 0 4 4M16 5h4v2a4 4 0 0 1-4 4M12 14v5M8 21h8M9 19h6"/></svg></span>
+        <span><strong>Quiz Bíblico</strong><small>Projete as perguntas e jogue em grupo.</small></span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+    </nav>
+    <div class="shortcuts" aria-label="Atalhos de apresentação">
+      <span><kbd>F</kbd> alterna o modo Datashow</span>
+      <span><kbd>B</kbd> busca outro hino ou referência durante a leitura</span>
+      <span><kbd>←</kbd> <kbd>→</kbd> mudam de estrofe, versículo ou slide</span>
+      <span><kbd>Esc</kbd> sai da tela cheia</span>
+    </div>
+  </main>
+</body>
+</html>

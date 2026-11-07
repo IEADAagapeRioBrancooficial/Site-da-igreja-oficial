@@ -243,6 +243,35 @@ function setPalavra() {
 }
 
 // ─── CULTOS (lugar, dia e horário) ───────────────────
+function renderProximoCulto() {
+  const card = document.getElementById("nextService");
+  if (!card) return;
+  const weekdays = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
+  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const localClock = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/Rio_Branco", weekday: "short", hour: "2-digit", minute: "2-digit", hourCycle: "h23"
+  });
+  const now = Object.fromEntries(localClock.formatToParts(new Date()).map(part => [part.type, part.value]));
+  const currentDay = days.indexOf(now.weekday);
+  const currentMinute = Number(now.hour) * 60 + Number(now.minute);
+  const weekMinutes = 7 * 24 * 60;
+  const services = CULTOS.flatMap(church => church.dias.map(service => {
+    const day = weekdays.indexOf(service.dia);
+    const [hour, minute] = service.horario.split(":").map(Number);
+    const difference = (day - currentDay) * 1440 + hour * 60 + minute - currentMinute;
+    return { ...service, day, church: church.nome, distance: (difference + weekMinutes) % weekMinutes };
+  }));
+  const soonest = Math.min(...services.map(service => service.distance));
+  const nextServices = services.filter(service => service.distance === soonest);
+  if (!nextServices.length) return;
+  const [nextService] = nextServices;
+  const today = nextService.day === currentDay && soonest < 1440;
+  document.getElementById("nextServiceTime").textContent = (today ? "Hoje" : nextService.dia) + " às " + nextService.horario;
+  document.getElementById("nextServiceChurch").textContent = nextServices.map(service => service.church).join(" · ");
+  card.hidden = false;
+  card.previousElementSibling.hidden = true;
+}
+
 function renderCultos() {
   var grid = document.getElementById("cultosGrid");
   CULTOS.forEach(function(c) {
@@ -309,8 +338,8 @@ function renderPastores() {
     // Avatar: foto ou ícone fallback
     var avatarHTML = p.foto
       ? '<div class="pastor-avatar pastor-avatar--foto">' +
-          '<img src="' + p.foto + '" alt="Foto de ' + p.nome + '" ' +
-          'onerror="this.parentElement.innerHTML=\'<i class=\\\"fas fa-user-tie\\\"></i>\'">' +
+          '<img src="' + p.foto + '" alt="Foto de ' + p.nome + '">' +
+          '<i class="fas fa-user-tie" aria-hidden="true" hidden></i>' +
         '</div>'
       : '<div class="pastor-avatar"><i class="fas fa-user-tie"></i></div>';
 
@@ -329,6 +358,13 @@ function renderPastores() {
               '<i class="fab fa-instagram"></i> Instagram</a>'
           : '') +
       '</div>';
+    const photo = el.querySelector(".pastor-avatar img");
+    if (photo) {
+      photo.addEventListener("error", () => {
+        photo.hidden = true;
+        photo.nextElementSibling.hidden = false;
+      });
+    }
     grid.appendChild(el);
   });
 }
@@ -345,9 +381,13 @@ function initHeader() {
 function initMobileMenu() {
   var btn = document.getElementById("menuToggle");
   var nav = document.getElementById("mobileNav");
-  btn.addEventListener("click", function() { nav.classList.toggle("open"); });
+  function setOpen(open) {
+    nav.classList.toggle("open", open);
+    btn.setAttribute("aria-expanded", String(open));
+  }
+  btn.addEventListener("click", function() { setOpen(!nav.classList.contains("open")); });
   nav.querySelectorAll("a").forEach(function(a) {
-    a.addEventListener("click", function() { nav.classList.remove("open"); });
+    a.addEventListener("click", function() { setOpen(false); });
   });
 }
 
@@ -399,6 +439,8 @@ document.addEventListener("DOMContentLoaded", function() {
   setHeroVerse();
   setPalavra();
   renderCultos();
+  renderProximoCulto();
+  setInterval(renderProximoCulto, 60_000);
   renderAvisos();
   renderIgrejas();
   renderPastores();

@@ -1,0 +1,106 @@
+/* Controles compartilhados do modo Datashow */
+.datashow-toolbar{display:flex;justify-content:flex-end;align-items:center;margin:0 0 12px}
+.datashow-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 15px;border:1px solid rgba(201,168,76,.55);border-radius:24px;background:rgba(201,168,76,.12);color:#f0c040;font:600 .78rem "Cinzel",serif;cursor:pointer;white-space:nowrap;transition:background .2s,border-color .2s,transform .2s}
+.datashow-button:hover{background:rgba(201,168,76,.22);border-color:#f0c040;transform:translateY(-1px)}
+.datashow-button:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.datashow-toolbar { gap: 8px; flex-wrap: wrap; }
+.datashow-search {
+  width: min(100% - 24px, 610px);
+  max-height: 92vh;
+  padding: clamp(16px, 4vw, 30px);
+  border: 1px solid #d6a85a;
+  border-radius: 14px;
+  color: #fdf8ee;
+  background: #211411;
+  box-shadow: 0 14px 50px #0009;
+}
+.datashow-search::backdrop { background: #0009; }
+.datashow-search .search-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 12px; }
+.datashow-search h2 { color: #ffdb95; font-size: clamp(1.05rem, 4vw, 1.6rem); }
+.datashow-search label { display: block; margin-bottom: 8px; color: #f4ddc9; }
+.datashow-search .search-fields { display: flex; gap: 8px; }
+.datashow-search input {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 12px;
+  font: inherit;
+  border: 1px solid #d6a85a80;
+  border-radius: 8px;
+  color: #fff;
+  background: #100a07;
+}
+.datashow-search .search-message:not(:empty) { margin-top: 12px; }
+.datashow-search .search-results:not(:empty) { display: grid; gap: 8px; margin-top: 10px; }
+.datashow-search .search-results button { justify-content: flex-start; text-align: left; white-space: normal; }
+.game-header .datashow-toolbar{margin:0}
+.game-header:has(.datashow-toolbar){flex-wrap:wrap;gap:10px}
+
+#cv:fullscreen,#cv.datashow-fallback{position:fixed;inset:0;z-index:9999;display:block!important;width:100vw;height:100vh;min-height:100vh;margin:0;padding:2vh 4vw;background:#0b0703;color:#fdf8ee;overflow:auto}
+#cv:fullscreen .cvi,#cv.datashow-fallback .cvi{display:flex;flex-direction:column;justify-content:center;width:min(100%,1600px);max-width:none;min-height:100%;margin:0 auto}
+#cv:fullscreen .datashow-toolbar,#cv.datashow-fallback .datashow-toolbar{margin-bottom:clamp(8px,2vh,20px)}
+#cv:fullscreen .datashow-button,#cv.datashow-fallback .datashow-button{font-size:1rem;padding:12px 18px}
+#cv:fullscreen .cvt,#cv.datashow-fallback .cvt{font-size:clamp(2rem,4vw,3.6rem);margin:0 0 8px}
+#cv:fullscreen .cvs,#cv.datashow-fallback .cvs{font-size:clamp(1rem,1.5vw,1.3rem);margin-bottom:clamp(8px,2vh,20px)}
+#cv:fullscreen .fc,#cv.datashow-fallback .fc,#cv:fullscreen .cn,#cv.datashow-fallback .cn,#cv:fullscreen .vp-wrap,#cv.datashow-fallback .vp-wrap,#cv:fullscreen .ca-back,#cv.datashow-fallback .ca-back{display:none!important}
+#cv:fullscreen .car-slide.active,#cv.datashow-fallback .car-slide.active{min-height:55vh;padding:2vh 1vw}
+#cv:fullscreen .car-card,#cv.datashow-fallback .car-card{display:flex;flex-direction:column;justify-content:center;max-width:none;min-height:50vh;padding:clamp(24px,5vh,64px) clamp(22px,5vw,80px)}
+#cv:fullscreen .car-vn,#cv.datashow-fallback .car-vn{font-size:clamp(1.2rem,2vw,1.8rem);margin-bottom:clamp(14px,3vh,30px)}
+#cv:fullscreen .car-vt,#cv.datashow-fallback .car-vt,#cv:fullscreen .vt,#cv.datashow-fallback .vt,#cv:fullscreen .stanza-text,#cv.datashow-fallback .stanza-text,#cv:fullscreen .refrao-text,#cv.datashow-fallback .refrao-text{font-size:clamp(2rem,3.7vw,4rem)!important;line-height:1.55}
+#cv:fullscreen .car-nav,#cv.datashow-fallback .car-nav{padding:12px 0}
+#cv:fullscreen .car-btn,#cv.datashow-fallback .car-btn{width:64px;height:64px;font-size:1.7rem}
+#cv:fullscreen .car-counter,#cv.datashow-fallback .car-counter{font-size:1.1rem}
+#cv:fullscreen .ca,#cv.datashow-fallback .ca{margin-top:10px;padding-top:12px}
+#cv:fullscreen .ab,#cv.datashow-fallback .ab{padding:12px 18px;font-size:.95rem}
+
+body:fullscreen,body.datashow-fallback{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(12px,2vh,24px);width:100vw;height:100vh;min-height:100vh;padding:2vh 4vw;margin:0;overflow:auto;background:#0b0703}
+body:fullscreen .game-header,body.datashow-fallback .game-header{width:100%;max-width:1500px;margin:0 auto;border-color:rgba(201,168,76,.35)}
+body:fullscreen .datashow-toolbar,body.datashow-fallback .datashow-toolbar{margin:0}
+body:fullscreen #quiz-root,body.datashow-fallback #quiz-root{display:flex;flex-direction:column;width:100%;max-width:1500px;min-height:min(78vh,900px);margin:auto;border-color:rgba(201,168,76,.55)}
+body:fullscreen #quiz-root .q-header,body.datashow-fallback #quiz-root .q-header{padding:16px 24px}
+body:fullscreen #quiz-root .q-body,body.datashow-fallback #quiz-root .q-body{flex:1;padding:clamp(24px,4vh,58px) clamp(24px,5vw,80px)}
+body:fullscreen #quiz-root .q-number,body.datashow-fallback #quiz-root .q-number,body:fullscreen #quiz-root .q-prize,body.datashow-fallback #quiz-root .q-prize{font-size:1rem}
+body:fullscreen #quiz-root .q-text,body.datashow-fallback #quiz-root .q-text{font-size:clamp(2rem,4vw,4rem);line-height:1.35;margin-bottom:clamp(20px,4vh,42px)}
+body:fullscreen #quiz-root .q-options,body.datashow-fallback #quiz-root .q-options{gap:clamp(12px,2vw,22px);margin-bottom:clamp(18px,3vh,30px)}
+body:fullscreen #quiz-root .q-opt,body.datashow-fallback #quiz-root .q-opt{min-height:78px;padding:clamp(15px,2vw,25px);font-size:clamp(1.25rem,2.3vw,2.2rem);line-height:1.4}
+body:fullscreen #quiz-root .q-opt .opt-letter,body.datashow-fallback #quiz-root .q-opt .opt-letter{width:42px;height:42px;flex:0 0 42px;font-size:1.1rem}
+body:fullscreen #quiz-root .q-lifelines,body.datashow-fallback #quiz-root .q-lifelines{max-width:900px;margin:0 auto 20px}
+body:fullscreen #quiz-root .q-ll,body.datashow-fallback #quiz-root .q-ll{padding:12px;font-size:1rem}
+body:fullscreen #quiz-root .q-feedback,body.datashow-fallback #quiz-root .q-feedback{font-size:clamp(1rem,1.6vw,1.5rem);line-height:1.6;padding:18px 22px}
+body:fullscreen #quiz-root .q-next,body.datashow-fallback #quiz-root .q-next{padding:17px;font-size:1.1rem}
+body:fullscreen .game-footer,body.datashow-fallback .game-footer{display:none}
+
+body.datashow-fallback { position: fixed; inset: 0; }
+body:is(:fullscreen, .datashow-fallback) {
+  justify-content: flex-start;
+}
+body:is(:fullscreen, .datashow-fallback) .game-header,
+body:is(:fullscreen, .datashow-fallback) #quiz-root {
+  flex-shrink: 0;
+}
+body:is(:fullscreen, .datashow-fallback) #quiz-root {
+  min-height: 0;
+}
+body:is(:fullscreen, .datashow-fallback) :is(.q-start-title, .q-end-title) {
+  font-size: clamp(1.6rem, 3.4vw, 3rem);
+}
+body:is(:fullscreen, .datashow-fallback) .q-end-score {
+  font-size: clamp(3rem, 6vw, 6rem);
+}
+body:is(:fullscreen, .datashow-fallback) .q-end-verse {
+  max-width: 60ch;
+  font-size: clamp(1rem, 1.7vw, 1.5rem);
+}
+
+@media (min-width: 701px) and (max-height: 820px) {
+  #cv:is(:fullscreen, .datashow-fallback) .cbr { display: none; }
+  #cv:is(:fullscreen, .datashow-fallback) .car-slide.active { min-height: 42vh; }
+  #cv:is(:fullscreen, .datashow-fallback) .car-card { min-height: 38vh; padding-block: 22px; }
+  #cv:is(:fullscreen, .datashow-fallback) .car-vt { font-size: clamp(1.85rem, 6.4vh, 3.5rem) !important; line-height: 1.35; }
+  #cv:is(:fullscreen, .datashow-fallback) .car-btn { width: 50px; height: 50px; }
+  body:is(:fullscreen, .datashow-fallback) #quiz-root .q-body { padding-block: 18px; }
+  body:is(:fullscreen, .datashow-fallback) #quiz-root .q-text { font-size: clamp(1.8rem, 5.5vh, 3rem); margin-bottom: 16px; }
+  body:is(:fullscreen, .datashow-fallback) #quiz-root .q-opt { min-height: 64px; padding-block: 12px; }
+  body:is(:fullscreen, .datashow-fallback) #quiz-root .q-lifelines { margin-bottom: 14px; }
+}
+
+@media(max-width:700px){#cv:fullscreen,#cv.datashow-fallback{padding:12px}#cv:fullscreen .car-vt,#cv.datashow-fallback .car-vt,#cv:fullscreen .vt,#cv.datashow-fallback .vt,#cv:fullscreen .stanza-text,#cv.datashow-fallback .stanza-text,#cv:fullscreen .refrao-text,#cv.datashow-fallback .refrao-text{font-size:clamp(1.5rem,5vw,2.4rem)!important}body:fullscreen,body.datashow-fallback{padding:10px}body:fullscreen #quiz-root .q-options,body.datashow-fallback #quiz-root .q-options{grid-template-columns:1fr}body:fullscreen #quiz-root .q-text,body.datashow-fallback #quiz-root .q-text{font-size:clamp(1.65rem,6vw,2.5rem)}}
